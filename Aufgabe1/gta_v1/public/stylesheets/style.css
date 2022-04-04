@@ -110,26 +110,58 @@ a {
 /* ### TODO ### Styles for Header Component */
 
 /* ... your code here ... */
+header{
+  background-color: lightgray;
+}
+header h1{text-align:center;}
+header nav {float:right;margin:20px;}
+header img{margin:20px; width:2.5%;}
+
 
 
 /* ### TODO ### Styles for Main Component */
 
 /* ... your code here ... */
+.main{
+  margin: 20px;
+  display: flex;
+  gap: 15px;
+  flex-direction: column|column;
+}
 
-
+fieldset{padding:15px;}
 /* ### TODO ### Styles for Tagging component */
 
 /* ... your code here ... */
 
 
+
 /* ### TODO ### Styles for Discovery component */
+.discovery__wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column|column;
+  gap:20px;
+}
 
 /* ... your code here ... */
+#discoveryResults{color:#00B7FF;}
+li{
+  padding:10px;
+  border:1px solid gray;
+  background-color: lightgray;
+}
+
 
 
 /* ### TODO ### Styles for Footer Component */
 
 /* ... your code here ... */
+footer{
+  
+  background-color:lightgray
+}
+footer span {margin: 20px;}
 
 
 /* ### TODO ### Media Queries */
