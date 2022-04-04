@@ -109,27 +109,95 @@ a {
 
 /* ### TODO ### Styles for Header Component */
 
-/* ... your code here ... */
+header {
+   background-color: antiquewhite;
+}
 
 
 /* ### TODO ### Styles for Main Component */
 
-/* ... your code here ... */
+.main__tagging, .main__discovery {
+  float: left;
+  width: 35%;
+  margin-right: 3.33333%;
+  padding:1px;
+ 
+}
 
 
 /* ### TODO ### Styles for Tagging component */
-
-/* ... your code here ... */
+.main__tagging {
+  height: 450px;
+width: 200px;
+  border:right;
+  margin-left: 1cm;
+	display:table;
+}
+#latitude {
+height: 30px;
+width: 150px;
+display: table;
+margin-left: 10%;
+}
+#longitude {
+height: 30px;
+width: 150px;
+display: table;
+margin-left: 10%;
+}
+#tagName{
+height: 30px;
+width: 150px;
+display: table;
+margin-left: 10%;
+}
+#hashtag {
+height: 30px;
+width: 150px;
+display: table;
+margin-left: 10%;
+}
+#submitTag{
+height: 30px;
+width: 150px;
+border: 2px;
+margin-left: 10%;
+margin-bottom: 10%;
+}
 
 
 /* ### TODO ### Styles for Discovery component */
+.main__discovery { 
+height: 500px;
+width: 1500px;
+border:left ;
+margin-top: 1cm;
+}
+#searchNameOfTag{
+height: 30px;
+width: 150px;
+margin-left:10%;
+display: table;
 
-/* ... your code here ... */
+}
+#searchTag{
+height: 30px;
+width: 150px;
+border: 2px;
+margin-left: 10%;
+margin-bottom: 10%;
+}
+
+.discovery__results{
+  color: aqua;
+}
 
 
 /* ### TODO ### Styles for Footer Component */
 
-/* ... your code here ... */
+footer{
+  background-color: antiquewhite;
+}
 
 
 /* ### TODO ### Media Queries */
