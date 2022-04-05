@@ -108,14 +108,119 @@ a {
 
 
 /* ### TODO ### Styles for Header Component */
+.header {
+  display: flex;
+  flex-direction:row;
+  justify-content:space-between;
+  background-color:rgb(235,235,235);
+  height: 130px;
+}
 
-/* ... your code here ... */
+.header__title {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.header__navigation {
+  text-align: right;
+  margin-right: 40px;
+  margin-top: 60px;
+}
+.header__image {
+  box-align: right;
+  margin-top: 40px;
+  margin-left: 3%;
+  margin-bottom: 50px;
+  width: 40px;
+}
 
 
 /* ### TODO ### Styles for Main Component */
 
-/* ... your code here ... */
+/* Create three equal columns that float next to each other */
 
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other on smaller screens (600px wide or less) */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 20px;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+section.tagging {
+  margin-left: 3%
+}
+
+.discovery__wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 20px;
+  margin-top: 3%;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  padding: 10px;
+  border-style: solid;
+  border-color: black;
+  border-width: 0.5px;
+  margin-bottom: 8px;
+  color: rgb(0,215,255);
+  background-color: rgb(235,235,235);
+}
+
+
+
+.main__discovery {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-bottom: 3%;
+}
+
+input {
+  padding: 6px;
+  margin: 6px;
+}
+
+input[type="submit"] {
+  width: 178px;
+}
+
+label {
+  margin: 6px;
+}
+
+legend {
+  margin-left: 6px;
+}
+
+section {
+  margin-top: 4%;
+  margin-left: 0.5%;
+  margin-right: 0.5%;
+  margin-bottom: 1%;
+}
 
 /* ### TODO ### Styles for Tagging component */
 
@@ -129,8 +234,26 @@ a {
 
 /* ### TODO ### Styles for Footer Component */
 
-/* ... your code here ... */
+.footer {
+  display: flex;
+  flex-direction:row;
+  justify-content:space-between;
+  background-color:rgb(235,235,235);
+  height: 80px;
+}
+#discovery__map__discription {
+  color: lightgrey;
+  display: block;
+}
 
+#footerSpanText {
+  margin-left: 3%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  font-family: "Verdana", sans-serif;
+}
 
 /* ### TODO ### Media Queries */
 
