@@ -45,8 +45,26 @@ a {
 }
 
 /* ### TODO ### Styles for other HTML elements */
+.header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header__image{
+ max-width: 2cm;
+ max-height: 2cm;
+ margin: 20px;
+}
 
-/* ... your code here ... */
+.header__title{
+ text-align: center;
+}
+
+.header__navigation{
+  text-align: right;
+  margin: 20px;
+
+}
 
 
 /* Grid styles (no changes required) */
@@ -129,10 +147,11 @@ header {
 .main__tagging {
   height: 450px;
 width: 200px;
-  border:right;
+  border:center;
   margin-left: 1cm;
 	display:table;
 }
+
 #latitude {
 height: 30px;
 width: 150px;
@@ -167,11 +186,15 @@ margin-bottom: 10%;
 
 
 /* ### TODO ### Styles for Discovery component */
-.main__discovery { 
-height: 500px;
-width: 1500px;
+.main__discovery #discoveryFilterForm { 
+height: 100px;
+width: 250px;
 border:left ;
-margin-top: 1cm;
+margin: 10px;
+}
+.discovery__title{
+  border:left ;
+margin: 10px;
 }
 #searchNameOfTag{
 height: 30px;
@@ -188,7 +211,9 @@ margin-left: 10%;
 margin-bottom: 10%;
 }
 
-.discovery__results{
+.discovery__wrapper{
+  margin: right;
+  display: flexbox;
   color: aqua;
 }
 
@@ -201,5 +226,9 @@ footer{
 
 
 /* ### TODO ### Media Queries */
-
+.discovery__map{
+  align-items: center;
+  display: flex;
+  margin: 10px;
+}
 /* ... your code here ... */
