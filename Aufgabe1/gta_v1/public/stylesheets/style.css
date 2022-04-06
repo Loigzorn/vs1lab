@@ -112,10 +112,15 @@ a {
 /* ... your code here ... */
 header{
   background-color: lightgray;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
 }
-header h1{text-align:center;}
+header h1{text-align:center;padding:45px;}
 header nav {float:right;margin:20px;}
-header img{margin:20px; width:2.5%;}
+header img{margin:20px; width:4%;}
 
 
 
@@ -126,13 +131,18 @@ header img{margin:20px; width:2.5%;}
   margin: 20px;
   display: flex;
   gap: 15px;
-  flex-direction: column|column;
+  flex-direction: "column|column";
 }
-
-fieldset{padding:15px;}
+main h2{padding: 10px;}
+main fieldset{padding:15px;margin-bottom: 10px;}
 /* ### TODO ### Styles for Tagging component */
 
 /* ... your code here ... */
+#latitude{padding: 5px;}
+#longitude{padding: 5px;}
+#tagName{padding: 5px;}
+#hashtag{padding: 5px;}
+#submitTag{padding: 5px;margin-top: 10px;}
 
 
 
@@ -140,26 +150,35 @@ fieldset{padding:15px;}
 .discovery__wrapper{
   display: flex;
   flex-wrap: wrap;
-  flex-direction: column|column;
+  flex-direction: "column|column";
   gap:20px;
 }
 
 /* ... your code here ... */
 #discoveryResults{color:#00B7FF;}
 li{
-  padding:10px;
+  font-weight: bold;
+  padding:15px;
   border:1px solid gray;
   background-color: lightgray;
+  margin-top:10px;
 }
-
+ul{
+  list-style-type: none;
+}
+#searchNameOfTag{padding: 5px;}
+#searchTag{padding: 5px;margin-top:10px;}
+.discovery__map{margin-top: 10px;}
+main span{display:block;}
 
 
 /* ### TODO ### Styles for Footer Component */
 
 /* ... your code here ... */
 footer{
-  
-  background-color:lightgray
+  display: flex;
+  align-items: center;
+  background-color:lightgray;
 }
 footer span {margin: 20px;}
 
