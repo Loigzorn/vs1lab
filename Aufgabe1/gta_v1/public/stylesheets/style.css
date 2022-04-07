@@ -156,7 +156,6 @@ a {
 .main {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   column-gap: 20px;
 }
 
@@ -188,9 +187,10 @@ li {
   color: var(--link-color);
   background-color: rgb(235,235,235);
   font-weight: bold;
+  border-radius: 8px;
+  border: 1px solid;
+  border-color: gray;
 }
-
-
 
 .main__discovery {
   display: flex;
@@ -208,6 +208,8 @@ input {
 }
 
 input[type="submit"] {
+  border-radius: 8px;
+  border: 1px solid;
   width: 178px;
 }
 
@@ -266,4 +268,11 @@ section {
 
 /* ### TODO ### Media Queries */
 
-/* ... your code here ... */
+@media(max-width: 751px) {
+  .main {
+    flex-direction: column;
+  }
+
+}
+
+
