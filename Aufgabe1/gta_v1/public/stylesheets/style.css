@@ -110,8 +110,8 @@ a {
 /* ### TODO ### Styles for Header Component */
 .header {
   display: flex;
-  flex-direction:row;
-  justify-content:space-between;
+  flex-direction: row;
+  justify-content: space-between;
   background-color:rgb(235,235,235);
   height: 130px;
 }
