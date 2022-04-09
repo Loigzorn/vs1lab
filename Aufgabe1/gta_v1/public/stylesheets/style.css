@@ -44,6 +44,64 @@ a {
   color: var(--link-color);
 }
 
+ul {
+  list-style-type: none;
+}
+
+li {
+  padding: 10px;
+  border-style: solid;
+  border-color: black;
+  border-width: 0.5px;
+  margin-bottom: 8px;
+  color: var(--link-color);
+  background-color: rgb(235,235,235);
+  font-weight: bold;
+  border-radius: 8px;
+  border: 1px solid;
+  border-color: gray;
+}
+
+
+h2 {
+  margin-bottom: 10px;
+}
+
+
+input {
+  padding: 6px;
+  margin-left: 8px;
+  margin-right: 16px;
+  margin-top: 4px;
+  margin-bottom: 10px;
+}
+
+input[type="submit"] {
+  border-radius: 8px;
+  border: 1px solid;
+  width: 178px;
+}
+
+fieldset {
+  padding-top: 10px;
+}
+
+label {
+  margin: 6px;
+}
+
+legend {
+  margin-left: 6px;
+  font-weight: bold;
+}
+
+section {
+  margin-top: 4%;
+  margin-left: 0.5%;
+  margin-right: 0.5%;
+  margin-bottom: 1%;
+}
+
 /* ### TODO ### Styles for other HTML elements */
 
 /* ... your code here ... */
@@ -159,11 +217,19 @@ a {
   column-gap: 20px;
 }
 
-h2 {
-  margin-bottom: 10px;
-}
+/* ### TODO ### Styles for Tagging component */
+
 section.tagging {
   margin-left: 3%
+}
+
+/* ### TODO ### Styles for Discovery component */
+
+.main__discovery {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-bottom: 3%;
 }
 
 .discovery__wrapper {
@@ -174,87 +240,21 @@ section.tagging {
   margin-top: 3%;
 }
 
-ul {
-  list-style-type: none;
+#discovery__map__discription {
+  color: lightgrey;
+  display: block;
 }
-
-li {
-  padding: 10px;
-  border-style: solid;
-  border-color: black;
-  border-width: 0.5px;
-  margin-bottom: 8px;
-  color: var(--link-color);
-  background-color: rgb(235,235,235);
-  font-weight: bold;
-  border-radius: 8px;
-  border: 1px solid;
-  border-color: gray;
-}
-
-.main__discovery {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  margin-bottom: 3%;
-}
-
-input {
-  padding: 6px;
-  margin-left: 8px;
-  margin-right: 16px;
-  margin-top: 4px;
-  margin-bottom: 10px;
-}
-
-input[type="submit"] {
-  border-radius: 8px;
-  border: 1px solid;
-  width: 178px;
-}
-
-fieldset {
-  padding-top: 10px;
-}
-
-label {
-  margin: 6px;
-}
-
-legend {
-  margin-left: 6px;
-  font-weight: bold;
-}
-
-section {
-  margin-top: 4%;
-  margin-left: 0.5%;
-  margin-right: 0.5%;
-  margin-bottom: 1%;
-}
-
-/* ### TODO ### Styles for Tagging component */
-
-/* ... your code here ... */
-
-
-/* ### TODO ### Styles for Discovery component */
-
-/* ... your code here ... */
 
 
 /* ### TODO ### Styles for Footer Component */
 
 .footer {
+  margin-top: auto; 
   display: flex;
   flex-direction:row;
   justify-content:space-between;
   background-color:rgb(235,235,235);
   height: 80px;
-}
-#discovery__map__discription {
-  color: lightgrey;
-  display: block;
 }
 
 #footerSpanText {
@@ -272,7 +272,4 @@ section {
   .main {
     flex-direction: column;
   }
-
 }
-
-
