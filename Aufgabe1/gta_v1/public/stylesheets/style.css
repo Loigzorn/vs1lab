@@ -44,6 +44,62 @@ a {
   color: var(--link-color);
 }
 
+ul {
+  list-style-type: none;
+}
+
+li {
+  padding: 10px;
+  border-style: solid;
+  border-color: black;
+  border-width: 0.5px;
+  margin-bottom: 8px;
+  color: var(--link-color);
+  background-color: var(--background-color);
+  font-weight: bold;
+  border-radius: 8px;
+  border: 1px solid;
+  border-color: gray;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+input {
+  padding: 6px;
+  margin-left: 8px;
+  margin-right: 16px;
+  margin-top: 4px;
+  margin-bottom: 10px;
+}
+
+input[type="submit"] {
+  border-radius: 8px;
+  border: 1px solid;
+  width: 178px;
+}
+
+fieldset {
+  padding-top: 10px;
+}
+
+label {
+  margin: 6px;
+}
+
+legend {
+  margin-left: 6px;
+  font-weight: bold;
+}
+
+section {
+  margin-top: 4%;
+  margin-left: 0.5%;
+  margin-right: 0.5%;
+  margin-bottom: 1%;
+}
+
 /* ### TODO ### Styles for other HTML elements */
 
 /* ... your code here ... */
@@ -108,30 +164,108 @@ a {
 
 
 /* ### TODO ### Styles for Header Component */
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: var(--background-color);
+  height: 130px;
+}
 
-/* ... your code here ... */
+.header__title {
+  margin-top: 50px;
+}
+
+.header__navigation {
+  margin-right: 40px;
+  margin-top: 60px;
+}
+.header__image {
+  box-align: right;
+  margin-top: 40px;
+  margin-left: 3%;
+  margin-bottom: 50px;
+  width: 40px;
+}
 
 
 /* ### TODO ### Styles for Main Component */
 
-/* ... your code here ... */
+/* Create three equal columns that float next to each other */
 
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other on smaller screens (600px wide or less) */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+}
 
 /* ### TODO ### Styles for Tagging component */
 
-/* ... your code here ... */
-
+section.tagging {
+  margin-left: 3%
+}
 
 /* ### TODO ### Styles for Discovery component */
 
-/* ... your code here ... */
+.main__discovery {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-bottom: 3%;
+}
+
+.discovery__wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 20px;
+  margin-top: 3%;
+}
+
+#discovery__map__discription {
+  color: var(--border-color);
+  display: block;
+}
 
 
 /* ### TODO ### Styles for Footer Component */
 
-/* ... your code here ... */
+.footer {
+  margin-top: auto; 
+  display: flex;
+  flex-direction:row;
+  justify-content:space-between;
+  background-color: var(--background-color);
+  height: 80px;
+}
 
+#footerSpanText {
+  margin-left: 3%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  font-family: "Verdana", sans-serif;
+}
 
 /* ### TODO ### Media Queries */
 
-/* ... your code here ... */
+@media(max-width: 751px) {
+  .main {
+    flex-direction: column;
+  }
+}
