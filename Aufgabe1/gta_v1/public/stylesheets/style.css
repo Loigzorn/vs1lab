@@ -55,18 +55,16 @@ li {
   border-width: 0.5px;
   margin-bottom: 8px;
   color: var(--link-color);
-  background-color: rgb(235,235,235);
+  background-color: var(--background-color);
   font-weight: bold;
   border-radius: 8px;
   border: 1px solid;
   border-color: gray;
 }
 
-
 h2 {
   margin-bottom: 10px;
 }
-
 
 input {
   padding: 6px;
@@ -170,17 +168,15 @@ section {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color:rgb(235,235,235);
+  background-color: var(--background-color);
   height: 130px;
 }
 
 .header__title {
-  text-align: center;
   margin-top: 50px;
 }
 
 .header__navigation {
-  text-align: right;
   margin-right: 40px;
   margin-top: 60px;
 }
@@ -241,7 +237,7 @@ section.tagging {
 }
 
 #discovery__map__discription {
-  color: lightgrey;
+  color: var(--border-color);
   display: block;
 }
 
@@ -253,7 +249,7 @@ section.tagging {
   display: flex;
   flex-direction:row;
   justify-content:space-between;
-  background-color:rgb(235,235,235);
+  background-color: var(--background-color);
   height: 80px;
 }
 
