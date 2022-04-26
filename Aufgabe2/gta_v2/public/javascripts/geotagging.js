@@ -91,7 +91,7 @@ class MapManager {
         tagList += tags.reduce((acc, tag) => `${acc}|${tag.name},${tag.latitude},${tag.longitude}`, "");
 
         const mapQuestUrl = `https://www.mapquestapi.com/staticmap/v4/getmap?key=${this.#apiKey}&size=600,400&zoom=${zoom}&center=${latitude},${longitude}&pois=${tagList}`;
-        console.log("Generated MapQuest URL:", mapQuestUrl);
+        // console.log("Generated MapQuest URL:", mapQuestUrl);
 
         return mapQuestUrl;
     }
@@ -103,8 +103,49 @@ class MapManager {
  * It is called once the page has been fully loaded.
  */
 // ... your code here ...
+function updateLocation() {
+    LocationHelper.findLocation(callbackOfLocationAttributes);
+
+    // var mapMan = new MapManager('bWQM84jzA43ETIOGOIyfighZXKAUFXmm');
+    // var latitude = document.getElementById("latitude");
+    // var longitude = document.getElementById("longitude");
+    // var mapUrl;
+
+    // if (null !== latitude && null !== longitude) {
+    //     if (latitude.value == '' || longitude.value == '') {
+    //         mapUrl = mapMan.getMapUrl(latitude.placeholder, longitude.placeholder);
+    //         console.log("Used location: latitude: " + latitude.placeholder + ", longitude: " + longitude.placeholder)
+    //     } else {
+    //         mapUrl = mapMan.getMapUrl(latitude.value, longitude.value);
+    //         console.log("Used location: latitude: " + latitude.value + ", longitude: " + longitude.value)
+    //     }
+    // } else {
+    //     console.error("latitude is: " + latitude +  " and longitude is: " + longitude);
+    // }
+
+    // var domMap = document.getElementById("mapView");
+    // domMap.src = mapUrl;
+}
+
+function callbackOfLocationAttributes(locationHelper) {
+    if (locationHelper instanceof LocationHelper) {
+        var latitude = document.getElementById("latitude");
+        latitude.value = parseFloat(locationHelper.latitude);
+        var longitude = document.getElementById("longitude");
+        longitude.value = parseFloat(locationHelper.longitude);
+    } else {
+        console.error("Wrong instance of locationHelper provided, should be " + typeof(LocationHelper) + ", but is " + typeof(locationHelper) + " instead.");
+    }
+
+    var mapMan = new MapManager('bWQM84jzA43ETIOGOIyfighZXKAUFXmm');
+    var latitude = document.getElementById("latitude");
+    var longitude = document.getElementById("longitude");
+    var mapUrl = mapMan.getMapUrl(latitude.value, longitude.value);
+    var domMap = document.getElementById("mapView");
+    domMap.src = mapUrl;
+}
 
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
-    alert("Please change the script 'geotagging.js'");
+    updateLocation();
 });
