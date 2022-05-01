@@ -104,12 +104,13 @@ class MapManager {
  */
 // ... your code here ...
 
-function updateLocation (){
+function updateLocation(helper) {
 
-
-
-
+    document.getElementById('longitude').attributes[3].nodeValue = helper.longitude;
+    document.getElementById('latitude').attributes[3].nodeValue = helper.latitude;
 }
+
+LocationHelper.findLocation(updateLocation);
 
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
