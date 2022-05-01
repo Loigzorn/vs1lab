@@ -105,10 +105,19 @@ class MapManager {
 // ... your code here ...
 
 function updateLocation(helper) {
+    const map = new MapManager("bWQM84jzA43ETIOGOIyfighZXKAUFXmm");
 
-    document.getElementById('longitude').attributes[3].nodeValue = helper.longitude;
-    document.getElementById('latitude').attributes[3].nodeValue = helper.latitude;
+    const latitude = helper.latitude;
+    const longitude = helper.longitude;
+
+    const mapURL = map.getMapUrl(latitude, longitude)
+
+    document.getElementById('latitude').attributes[3].nodeValue = latitude;
+    document.getElementById('longitude').attributes[3].nodeValue = longitude
+
+    document.getElementById('mapView').attributes.getNamedItem("src").value = mapURL;
 }
+
 
 LocationHelper.findLocation(updateLocation);
 
