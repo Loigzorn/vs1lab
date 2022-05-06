@@ -119,9 +119,7 @@ function updateLocation(helper) {
 }
 
 
-LocationHelper.findLocation(updateLocation);
-
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
-    alert("Please change the script 'geotagging.js'");
+    LocationHelper.findLocation(updateLocation);
 });
