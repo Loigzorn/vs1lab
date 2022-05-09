@@ -110,9 +110,11 @@ function updateLocation(helper) {
     const mapURL = map.getMapUrl(latitude, longitude)
 
     document.getElementById('latitude').attributes[3].nodeValue = latitude;
-    document.getElementById('longitude').attributes[3].nodeValue = longitude
+    document.getElementById('longitude').attributes[3].nodeValue = longitude;
 
     document.getElementById('mapView').attributes.getNamedItem("src").value = mapURL;
+    document.getElementById('searchLatitude').value = latitude;
+    document.getElementById('searchLongitude').value = longitude;
 }
 
 
