@@ -103,6 +103,17 @@ class MapManager {
  * It is called once the page has been fully loaded.
  */
 // ... your code here ...
+onload = "updateLocation()"
+
+ async function updateLocation(findLocation){
+
+    let latitude =await findLocation.latitude();
+    document.getElementsById("latitude").textContent = latitude;
+    let longitude = await findLocation.longitude();
+    document.getElementsById("longitude").textContent = longitude;
+   
+
+ }
 
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
