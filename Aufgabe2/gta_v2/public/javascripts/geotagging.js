@@ -98,24 +98,25 @@ class MapManager {
 }
 
 /**
- * TODO: 'updateLocation'
  * A function to retrieve the current location and update the page.
  * It is called once the page has been fully loaded.
  */
-// ... your code here ...
-onload = "updateLocation()"
+function updateLocation(helper) {
+    const map = new MapManager("bWQM84jzA43ETIOGOIyfighZXKAUFXmm");
 
- async function updateLocation(findLocation){
+    const latitude = helper.latitude;
+    const longitude = helper.longitude;
 
-    let latitude =await findLocation.latitude();
-    document.getElementsById("latitude").textContent = latitude;
-    let longitude = await findLocation.longitude();
-    document.getElementsById("longitude").textContent = longitude;
-   
+    const mapURL = map.getMapUrl(latitude, longitude)
 
- }
+    document.getElementById('latitude').attributes[3].nodeValue = latitude;
+    document.getElementById('longitude').attributes[3].nodeValue = longitude
+
+    document.getElementById('mapView').attributes.getNamedItem("src").value = mapURL;
+}
+
 
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
-    alert("Please change the script 'geotagging.js'");
+    LocationHelper.findLocation(updateLocation);
 });
