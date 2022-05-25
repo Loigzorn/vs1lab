@@ -45,7 +45,6 @@ class GeoTag {
     get hashtag() {
         return this.#hashtag;
     }
-
 }
 
 module.exports = GeoTag;
