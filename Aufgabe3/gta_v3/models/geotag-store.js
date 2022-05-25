@@ -25,8 +25,25 @@
  */
 class InMemoryGeoTagStore{
 
-    // TODO: ... your code here ...
+    #geoTags = [];
 
+    addGeoTag(geoTag) {
+        geoTags.push(geoTag);
+    }
+
+    removeGeoTag(geoTag) {
+        return geoTags.filter(function(ele){
+            return ele.tagName != geoTag.tagName;
+        });
+    }
+
+    getNearbyGeoTags() {
+
+    }
+
+    searchNearbyGeoTags() {
+
+    }
 }
 
 module.exports = InMemoryGeoTagStore
