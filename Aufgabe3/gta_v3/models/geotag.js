@@ -11,8 +11,8 @@
  */
 class GeoTag {
 
-    #latitude = '';
-    #longitude = '';
+    #latitude;
+    #longitude;
     #tagName = '';
     #hashtag = '';
 
