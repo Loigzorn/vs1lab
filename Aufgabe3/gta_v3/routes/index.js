@@ -20,7 +20,7 @@ const router = express.Router();
  * TODO: implement the module in the file "../models/geotag.js"
  */
 // eslint-disable-next-line no-unused-vars
-const GeoTag = require('../models/geotag');
+const GeoTag = require('../models/geotag.js');
 
 /**
  * The module "geotag-store" exports a class GeoTagStore. 
@@ -29,7 +29,7 @@ const GeoTag = require('../models/geotag');
  * TODO: implement the module in the file "../models/geotag-store.js"
  */
 // eslint-disable-next-line no-unused-vars
-const GeoTagStore = require('../models/geotag-store');
+const GeoTagStore = require('../models/geotag-store.js');
 
 /**
  * Route '/' for HTTP 'GET' requests.
@@ -40,6 +40,7 @@ const GeoTagStore = require('../models/geotag-store');
  * As response, the ejs-template is rendered without geotag objects.
  */
 
+ 
 // TODO: extend the following route example if necessary
 router.get('/', (req, res) => {
   res.render('index', { taglist: [] })
@@ -61,12 +62,14 @@ router.get('/', (req, res) => {
  */
 
 // TODO: ... your code here ...
-router.post('/tagging', (req, res) => {
-  var url_parts=new URL(req.url, `http://${req.body}`);
-  var NeuerGeotag=new GeoTag(url_parts); //Konstruktor Aufruf
-  GeoTagStore.addGeoTag(NeuerGeotag);
 
-  res.render('index', { taglist: [GeoTag] })
+router.post('/tagging', (req, res) => {
+  const geotag = new GeoTag(req.body.name, req.body.latitude, req.body.longitude, req.body.tag);
+  
+  GeoTagStore.addGeoTag(geoTag);  
+  
+    res.render('index', { taglist: geoTagStore.searchNearbyGeoTags(geotag.tagName, geotag.latitude, geotag.longitude) });
+
 });
 /**
  * Route '/discovery' for HTTP 'POST' requests.
@@ -85,16 +88,13 @@ router.post('/tagging', (req, res) => {
  */
 //addGeoTag removeGeoTag getNearbyGeoTags searchNearbyGeoTags
 // TODO: ... your code here ...
+//earchNearbyGeoTags(keyword, latitude, longitude)
 router.post('/discovery', (req, res) => {
-  var url_parts=new URL(req.url, `http://${req.body}`);
-  var query = url_parts.searchParams;
-  if(query.has("searchTerm")){
-    GeoTagStore.searchNearbyGeoTags(query.get("searchTerm"));
-  }
-  else{
-    GeoTagStore.getNearbyGeoTags();
-  }
+  
+ var geotags = req.body.name ? GeoTagStore.searchNearbyGeoTags(req.body.name, req.body.latitude, req.body.longitude) :
+  GeoTagStore.getNearbyGeoTags(req.body.latitude, req.body.longitude) ;
 
-  res.render('index', { taglist: [GeoTag] })
+  res.render('index', { taglist: JSON.stringify(geotags) });
 });
+
 module.exports = router;
