@@ -27,22 +27,46 @@ class InMemoryGeoTagStore{
 
     #geoTags = [];
 
+    constructor() {
+        geoTags = GeoTagExamples.tagList();
+    }
+
     addGeoTag(geoTag) {
         geoTags.push(geoTag);
     }
 
     removeGeoTag(geoTag) {
-        return geoTags.filter(function(ele){
+        geoTags = geoTags.filter(function(ele){
             return ele.tagName != geoTag.tagName;
         });
     }
 
-    getNearbyGeoTags() {
+    getNearbyGeoTags(latitude, longitude) {
+        const geolib = require('geolib');
+        nearbyGeoTags = [];
 
+        for(var i = 0; i < geoTags.length; i++) {
+            var distance = geolib.getDistance(latitude, longitude);
+            if (distance <= 10) {
+                nearbyGeoTags.push(geoTags[i]);
+            }
+        }
+
+        return nearbyGeoTags;
     }
 
-    searchNearbyGeoTags() {
+    searchNearbyGeoTags(keyword, latitude, longitude) {
+        nearbyGeoTags = getNearbyGeoTags(latitude, longitude);
+        geoTagsWithKeyword = [];
+        for (var i = 0; i < nearbyGeoTags.length; i++) {
+            const geoTag = nearbyGeoTags[i];
 
+            if(geoTag.hashtag().includes(keyword) || geoTag.tagName().includes(keyword)) {
+                geoTagsWithKeyword.push(nearbyGeoTags[i]);
+            }
+        }
+
+        return geoTagsWithKeyword;
     }
 }
 
