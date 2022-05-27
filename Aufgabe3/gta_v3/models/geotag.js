@@ -45,6 +45,15 @@ class GeoTag {
     get hashtag() {
         return this.#hashtag;
     }
+
+    stringify() {
+        return {
+            "name": getTagName(),
+            "latitude": getLatitude(),
+            "longitude": getLongitude(),
+            "hashtag": getHashtag()
+        };
+    }
 }
 
 module.exports = GeoTag;
