@@ -62,9 +62,9 @@ router.get('/', (req, res) => {
 
 // TODO: ... your code here ...
 router.post('/tagging', (req, res) => {
-
- GeoTag.GeoTag(req); //Konstruktor Aufruf
-  GeoTagStore.addGeoTag();
+  var url_parts=new URL(req.url, `http://${req.body}`);
+  var NeuerGeotag=new GeoTag(url_parts); //Konstruktor Aufruf
+  GeoTagStore.addGeoTag(NeuerGeotag);
 
   res.render('index', { taglist: [GeoTag] })
 });
@@ -89,7 +89,7 @@ router.post('/discovery', (req, res) => {
   var url_parts=new URL(req.url, `http://${req.body}`);
   var query = url_parts.searchParams;
   if(query.has("searchTerm")){
-    GeoTagStore.searchNearbyGeoTags("searchTerm");
+    GeoTagStore.searchNearbyGeoTags(query.get("searchTerm"));
   }
   else{
     GeoTagStore.getNearbyGeoTags();
