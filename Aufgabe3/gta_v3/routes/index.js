@@ -61,7 +61,13 @@ router.get('/', (req, res) => {
  */
 
 // TODO: ... your code here ...
+router.post('/tagging', (req, res) => {
 
+ GeoTag.GeoTag(req); //Konstruktor Aufruf
+  GeoTagStore.addGeoTag();
+
+  res.render('index', { taglist: [GeoTag] })
+});
 /**
  * Route '/discovery' for HTTP 'POST' requests.
  * (http://expressjs.com/de/4x/api.html#app.post.method)
@@ -77,7 +83,18 @@ router.get('/', (req, res) => {
  * To this end, "GeoTagStore" provides methods to search geotags 
  * by radius and keyword.
  */
-
+//addGeoTag removeGeoTag getNearbyGeoTags searchNearbyGeoTags
 // TODO: ... your code here ...
+router.post('/discovery', (req, res) => {
+  var url_parts=new URL(req.url, `http://${req.body}`);
+  var query = url_parts.searchParams;
+  if(query.has("searchTerm")){
+    GeoTagStore.searchNearbyGeoTags("searchTerm");
+  }
+  else{
+    GeoTagStore.getNearbyGeoTags();
+  }
 
+  res.render('index', { taglist: [GeoTag] })
+});
 module.exports = router;
