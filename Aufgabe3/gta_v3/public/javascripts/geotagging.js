@@ -25,14 +25,9 @@ function updateLocation(helper) {
   document.getElementById("latitude").attributes[3].nodeValue = latitude;
   document.getElementById("longitude").attributes[3].nodeValue = longitude;
 
-  document.getElementById("mapView").attributes.getNamedItem("src").value =
-    mapURL;
+  document.getElementById("mapView").attributes.getNamedItem("src").value = mapURL;
   //NOTE Added data-tags call
-  document
-    .getElementById("mapView")
-    .attributes.getNamedItem("data-tags").value = JSON.stringify(
-    mapURL.tagList
-  );
+  document.getElementById("mapView").attributes.getNamedItem("data-tags").value = JSON.stringify(mapURL.tagList);
 
   document.getElementById("searchLatitude").value = latitude;
   document.getElementById("searchLongitude").value = longitude;
@@ -41,10 +36,7 @@ function updateLocation(helper) {
 
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
-  if (
-    document.getElementById("searchLongitude").value == "" &&
-    document.getElementById("searchLatitude").value == ""
-  ) {
+  if (document.getElementById("searchLongitude").value == "" && document.getElementById("searchLatitude").value == "") {
     LocationHelper.findLocation(updateLocation);
   }
 });
