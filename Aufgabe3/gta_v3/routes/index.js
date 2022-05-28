@@ -66,9 +66,9 @@ router.get('/', (req, res) => {
 router.post('/tagging', (req, res) => {
   const geotag = new GeoTag(req.body.name, req.body.latitude, req.body.longitude, req.body.tag);
   
-  GeoTagStore.addGeoTag(geoTag);  
+  GeoTagStore.addGeoTag(geotag);  
   
-    res.render('index', { taglist: geoTagStore.searchNearbyGeoTags(geotag.tagName, geotag.latitude, geotag.longitude) });
+    res.render('index', { taglist: GeoTagStore.searchNearbyGeoTags(geotag.tagName, geotag.latitude, geotag.longitude) });
 
 });
 /**
