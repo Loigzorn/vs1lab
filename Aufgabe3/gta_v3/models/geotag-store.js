@@ -27,8 +27,11 @@ const GeoTag = require('../models/geotag.js');
  */
 class InMemoryGeoTagStore{
 
+    /**
+     * @type {GeoTag[]}
+     */
     #geoTags = [];
-    instance;
+    static #instance;
 
     constructor() {
         var tagList = GeoTagExamples.tagList;
@@ -39,7 +42,9 @@ class InMemoryGeoTagStore{
 
     addGeoTag(geoTag) {
         if (geoTag instanceof GeoTag) {
+            console.log(this.#geoTags.length);
             this.#geoTags.push(geoTag);
+            console.log("GeoTag successfully added" + this.#geoTags.length);
         } else {
             console.error("Failed to add GeoTag, as geoTag is: " + geoTag);
         }
@@ -53,15 +58,11 @@ class InMemoryGeoTagStore{
     }
 
     getNearbyGeoTags(latitudeOne, longitudeOne) {
-        const geolib = require('geolib');
         var nearbyGeoTags = [];
 
         for(var i = 0; i < this.#geoTags.length; i++) {
-            var coordOnes = {latitude: latitudeOne, longitude: longitudeOne};
             var secondLatitude = this.#geoTags[i].latitude;
             var secondLongitude = this.#geoTags[i].longitude;
-            var coordTwos = {latitude: secondLatitude, longitude: secondLongitude};
-            //var distance = geolib.getDistance(coordOnes, coordTwos);
             var x = 71.5 * (latitudeOne - secondLatitude);
             var y = 111.3 * (longitudeOne - secondLongitude);
             var distance = Math.sqrt(x * x, y * y);
@@ -87,11 +88,18 @@ class InMemoryGeoTagStore{
         return geoTagsWithKeyword;
     }
 
+    /**
+     * @type {GeoTag[]}
+     */
+    get geoTags() {
+        return this.#geoTags;
+    }
+
     static getInstance() {
-        if(!InMemoryGeoTagStore.instance) {
-            InMemoryGeoTagStore.instance = new InMemoryGeoTagStore();
+        if(InMemoryGeoTagStore.#instance == null) {
+            InMemoryGeoTagStore.#instance = new InMemoryGeoTagStore();
         }
-        return InMemoryGeoTagStore.instance;
+        return InMemoryGeoTagStore.#instance;
     }
 }
 

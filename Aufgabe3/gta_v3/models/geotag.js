@@ -11,10 +11,10 @@
  */
 class GeoTag {
 
-    #latitude;
-    #longitude;
-    #tagName = '';
-    #hashtag = '';
+    latitude;
+    longitude;
+    tagName = '';
+    hashtag = '';
 
     /**
     * Create a new GeoTag instance.
@@ -24,35 +24,27 @@ class GeoTag {
     * @param {string} hashtag The hashtag of the geoTag
     */
     constructor(latitude, longitude, tagName, hashtag) {
-        this.#latitude = latitude;
-        this.#longitude = longitude;
-        this.#tagName = tagName;
-        this.#hashtag = hashtag;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.tagName = tagName;
+        this.hashtag = hashtag;
+        return this;
     }
 
     get latitude() {
-        return this.#latitude;
+        return this.latitude;
     }
 
     get longitude() {
-        return this.#longitude;
+        return this.longitude;
     }
 
     get tagName() {
-        return this.#tagName;
+        return this.tagName;
     }
 
     get hashtag() {
-        return this.#hashtag;
-    }
-
-    toString() {
-        return {
-            "name": this.#tagName,
-            "latitude": this.#latitude,
-            "longitude": this.#longitude,
-            "hashtag": this.#hashtag
-        };
+        return this.hashtag;
     }
 }
 
