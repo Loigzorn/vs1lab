@@ -46,12 +46,12 @@ class GeoTag {
         return this.#hashtag;
     }
 
-    stringify() {
+    toString() {
         return {
-            "name": getTagName(),
-            "latitude": getLatitude(),
-            "longitude": getLongitude(),
-            "hashtag": getHashtag()
+            "name": this.#tagName,
+            "latitude": this.#latitude,
+            "longitude": this.#longitude,
+            "hashtag": this.#hashtag
         };
     }
 }
