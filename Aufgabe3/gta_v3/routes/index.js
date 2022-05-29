@@ -44,8 +44,6 @@ const GeoTagStore = require('../models/geotag-store.js');
 // TODO: extend the following route example if necessary
 router.get('/', (req, res) => {
   const geoTags = GeoTagStore.getInstance().geoTags;
-  console.log(geoTags);
-  console.log(JSON.stringify(geoTags));
   res.render('index', {
     taglist: geoTags,
     set_latitude: "",
@@ -72,13 +70,10 @@ router.get('/', (req, res) => {
 // TODO: ... your code here ...
 
 router.post('/tagging', (req, res) => {
-  console.log(req.body.latitude + ", " +  req.body.longitude);
   const geotag = new GeoTag(req.body.latitude, req.body.longitude, req.body.tagName, req.body.hashtag);
   GeoTagStore.getInstance().addGeoTag(geotag);
 
   const geoTags = GeoTagStore.getInstance().getNearbyGeoTags(geotag.latitude, geotag.longitude);
-  console.log(geoTags);
-  console.log(JSON.stringify(geoTags));
   res.render('index', {
     taglist: geoTags,
     set_latitude: req.body["latitude"],
@@ -107,8 +102,6 @@ router.post('/tagging', (req, res) => {
 router.post('/discovery', (req, res) => {
   const geoTags = req.body.searchNameOfTag ? GeoTagStore.getInstance().searchNearbyGeoTags(req.body.searchNameOfTag, req.body.searchLatitude, req.body.searchLongitude) :
   GeoTagStore.getInstance().getNearbyGeoTags(req.body.searchLatitude, req.body.searchLongitude);
-  console.log(geoTags);
-  console.log(JSON.stringify(geoTags));
   res.render('index', {
     taglist: geoTags,
     set_latitude: req.body["latitude"],
