@@ -26,11 +26,12 @@ function updateLocation(helper) {
   document.getElementById("longitude").attributes[3].nodeValue = longitude;
 
   document.getElementById("mapView").attributes.getNamedItem("src").value = mapURL;
-  //NOTE Added data-tags call
-  document.getElementById("mapView").attributes.getNamedItem("data-tags").value = JSON.stringify(mapURL.tagList);
 
   document.getElementById("searchLatitude").value = latitude;
   document.getElementById("searchLongitude").value = longitude;
+  var mapViewImage = document.getElementById("mapView");
+  mapViewImage.attributes.getNamedItem("data-tags").value = JSON.stringify(null);
+  console.log(mapViewImage);
 }
 
 if (document.getElementById("searchLongitude").value == "" && document.getElementById("searchLatitude").value == "") {
