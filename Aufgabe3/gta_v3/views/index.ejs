@@ -79,6 +79,7 @@
             <div class="discovery__wrapper">
                 <div class="discovery__taglist">
                     <ul class="discovery__results" id="discoveryResults">
+                        <% console.log("Elements is taglist: " + taglist + ", the lenght is " + taglist.length); %>
                         <% if (taglist !==undefined) taglist.forEach(function(gtag) { %>
                             <li>
                                 <%= gtag.name %> ( <%= gtag.latitude %>,<%= gtag.longitude %>) <%= gtag.hashtag %>
