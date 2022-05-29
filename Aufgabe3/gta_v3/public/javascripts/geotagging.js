@@ -30,8 +30,7 @@ function updateLocation(helper) {
   document.getElementById("mapView").attributes.getNamedItem("data-tags").value = JSON.stringify(mapURL.tagList);
 
   document.getElementById("searchLatitude").value = latitude;
-  document.getElementById("searchLongitude").value = longitude;
-  document.getElementById("searchTag").value = tags; //NOTE added searchTag 
+  document.getElementById("searchLongitude").value = longitude; 
 }
 
 if (document.getElementById("searchLongitude").value == "" && document.getElementById("searchLatitude").value == "") {
