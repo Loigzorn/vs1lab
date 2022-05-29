@@ -1,5 +1,7 @@
 // File origin: VS1LAB A3
 
+const GeoTagExamples = require('../models/geotag-examples.js');
+const GeoTag = require('../models/geotag.js');
 /**
  * This script is a template for exercise VS1lab/Aufgabe3
  * Complete all TODOs in the code documentation.
@@ -26,27 +28,40 @@
 class InMemoryGeoTagStore{
 
     #geoTags = [];
+    instance;
 
     constructor() {
-        geoTags = GeoTagExamples.tagList();
+        this.#geoTags = GeoTagExamples.tagList;
     }
 
     addGeoTag(geoTag) {
-        geoTags.push(geoTag);
+        if (geoTag instanceof GeoTag) {
+            this.#geoTags.push(geoTag);
+        } else {
+            console.error("Failed to add GeoTag, as geoTag is: " + geoTag);
+        }
     }
 
     removeGeoTag(geoTag) {
-        geoTags = geoTags.filter(function(ele){
+        this.#geoTags = this.#geoTags.filter(function(ele){
             return ele.tagName != geoTag.tagName;
         });
+        return this.#geoTags;
     }
 
-    getNearbyGeoTags(latitude, longitude) {
+    getNearbyGeoTags(latitudeOne, longitudeOne) {
         const geolib = require('geolib');
-        nearbyGeoTags = [];
+        var nearbyGeoTags = [];
 
-        for(var i = 0; i < geoTags.length; i++) {
-            var distance = geolib.getDistance(latitude, longitude);
+        for(var i = 0; i < this.#geoTags.length; i++) {
+            var coordOnes = {latitude: latitudeOne, longitude: longitudeOne};
+            var secondLatitude = this.#geoTags[i].latitude;
+            var secondLongitude = this.#geoTags[i].longitude;
+            var coordTwos = {latitude: secondLatitude, longitude: secondLongitude};
+            //var distance = geolib.getDistance(coordOnes, coordTwos);
+            var x = 71.5 * (latitudeOne - secondLatitude);
+            var y = 111.3 * (longitudeOne - secondLongitude);
+            var distance = Math.sqrt(x * x, y * y);
             if (distance <= 10) {
                 nearbyGeoTags.push(geoTags[i]);
             }
@@ -56,8 +71,8 @@ class InMemoryGeoTagStore{
     }
 
     searchNearbyGeoTags(keyword, latitude, longitude) {
-        nearbyGeoTags = getNearbyGeoTags(latitude, longitude);
-        geoTagsWithKeyword = [];
+        var nearbyGeoTags = this.getNearbyGeoTags(latitude, longitude);
+        var geoTagsWithKeyword = [];
         for (var i = 0; i < nearbyGeoTags.length; i++) {
             const geoTag = nearbyGeoTags[i];
 
@@ -67,6 +82,13 @@ class InMemoryGeoTagStore{
         }
 
         return geoTagsWithKeyword;
+    }
+
+    static getInstance() {
+        if(!InMemoryGeoTagStore.instance) {
+            InMemoryGeoTagStore.instance = new InMemoryGeoTagStore();
+        }
+        return InMemoryGeoTagStore.instance;
     }
 }
 
