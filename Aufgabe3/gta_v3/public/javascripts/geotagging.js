@@ -34,9 +34,10 @@ function updateLocation(helper) {
   document.getElementById("searchTag").value = tags; //NOTE added searchTag 
 }
 
+if (document.getElementById("searchLongitude").value == "" && document.getElementById("searchLatitude").value == "") {
+  LocationHelper.findLocation(updateLocation);
+}
+
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
-  if (document.getElementById("searchLongitude").value == "" && document.getElementById("searchLatitude").value == "") {
-    LocationHelper.findLocation(updateLocation);
-  }
 });
