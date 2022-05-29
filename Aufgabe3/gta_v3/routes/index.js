@@ -64,12 +64,11 @@ router.get('/', (req, res) => {
 // TODO: ... your code here ...
 
 router.post('/tagging', (req, res) => {
-  const geotag = new GeoTag(req.body.name, req.body.latitude, req.body.longitude, req.body.tag);
-  
-  GeoTagStore.addGeoTag(geotag);  
-  
-    res.render('index', { taglist: GeoTagStore.searchNearbyGeoTags(geotag.tagName, geotag.latitude, geotag.longitude) });
+  const geotag = new GeoTag(req.body.tagName, req.body.latitude, req.body.longitude, req.body.hashtag);
+  GeoTagStore.getInstance().addGeoTag(geotag);
 
+  const geoTags = GeoTagStore.getInstance().searchNearbyGeoTags(geotag.tagName, geotag.latitude, geotag.longitude);
+  res.render('index', { taglist: JSON.stringify(geoTags) });
 });
 /**
  * Route '/discovery' for HTTP 'POST' requests.
@@ -90,10 +89,8 @@ router.post('/tagging', (req, res) => {
 // TODO: ... your code here ...
 //earchNearbyGeoTags(keyword, latitude, longitude)
 router.post('/discovery', (req, res) => {
-  
- var geotags = req.body.name ? GeoTagStore.searchNearbyGeoTags(req.body.name, req.body.latitude, req.body.longitude) :
-  GeoTagStore.getNearbyGeoTags(req.body.latitude, req.body.longitude) ;
-
+  var geotags = req.body.searchNameOfTag ? GeoTagStore.getInstance().searchNearbyGeoTags(req.body.searchNameOfTag, req.body.searchLatitude, req.body.searchLongitude) :
+  GeoTagStore.getInstance().getNearbyGeoTags(req.body.searchLatitude, req.body.searchLongitude) ;
   res.render('index', { taglist: JSON.stringify(geotags) });
 });
 
