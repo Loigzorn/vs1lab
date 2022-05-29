@@ -1,4 +1,4 @@
-<!-- TODO: HTML AUS AUFGABE2 HIERHER KOPIEREN UND DIE BEISPIEL-EINTRÄGE DER DISCOVERY-LISTE MIT DEN FOLGENDEN ZEILEN ERSETZEN -->
+﻿<!-- TODO: HTML AUS AUFGABE2 HIERHER KOPIEREN UND DIE BEISPIEL-EINTRÄGE DER DISCOVERY-LISTE MIT DEN FOLGENDEN ZEILEN ERSETZEN -->
 
 
 
@@ -34,12 +34,10 @@
                 <fieldset>
                     <legend>Add a new GeoTag</legend>
                     <label for="latitude">Latitude:</label><br>
-                    <input type="text" id="latitude" name="latitude" placeholder="49.01379" pattern="^[9-0]+"
-                        disabled><br>
+                    <input type="text" id="latitude" name="latitude" placeholder="49.01379" pattern="^[9-0]+" disabled > <br>
 
                     <label for="longitude">Longitude:</label><br>
-                    <input type="text" id="longitude" name="longitude" placeholder="8.390071" pattern="^[9-0]+"
-                        disabled><br>
+                    <input type="text" id="longitude" name="longitude" placeholder="8.390071" pattern="^[9-0]+" disabled > <br>
 
                     <label for="tagName">Name:</label><br>
                     <input type="text" id="tagName" name="tagName" placeholder="e.g. Central Berlin" maxlength=10
@@ -79,7 +77,7 @@
             <div class="discovery__wrapper">
                 <div class="discovery__taglist">
                     <ul class="discovery__results" id="discoveryResults">
-                        <% console.log("Elements is taglist: " + taglist + ", the lenght is " + taglist.length); %>
+                        <% console.log("Elements is taglist: " + taglist.valueOf() + ", the lenght is " + taglist.length); %>
                         <% if (taglist !==undefined) taglist.forEach(function(gtag) { %>
                             <li>
                                 <%= gtag.name %> ( <%= gtag.latitude %>,<%= gtag.longitude %>) <%= gtag.hashtag %>
@@ -104,9 +102,19 @@
     <!-- Load JavaScripts
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script type="text/javascripts" src="./javascripts/location-helper.js" src="./javascripts/map-manager.js"
-        src="./javascripts/geotagging.js"></script>
-
+    <script type="text/javascript"> 
+        const jsFiles = [
+        "./javascripts/location-helper.js",
+        "./javascripts/map-manager.js",
+        "./javascripts/geotagging.js"
+        ]
+    
+        jsFiles.forEach((item) => {
+        const scriptEle = document.createElement('script');
+        scriptEle.src = item;
+        document.head.appendChild(scriptEle);
+        })
+    </script>
 
 </body>
 
