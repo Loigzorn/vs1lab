@@ -34,11 +34,9 @@ function updateLocation(helper) {
   console.log(mapViewImage);
 }
 
+// Wait for the page to fully load its DOM content, then call updateLocation
+// It is senseless to wait for the DOMContentLoaded event, 
+// as the event has already happend at this stage.
 if (document.getElementById("searchLongitude").value == "" && document.getElementById("searchLatitude").value == "") {
   LocationHelper.findLocation(updateLocation);
 }
-
-// Wait for the page to fully load its DOM content, then call updateLocation
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("DOM content loaded");
-});
