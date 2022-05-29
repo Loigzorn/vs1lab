@@ -31,7 +31,6 @@ function updateLocation(helper) {
 
   document.getElementById("searchLatitude").value = latitude;
   document.getElementById("searchLongitude").value = longitude;
-  document.getElementById("searchTag").value = tags; //NOTE added searchTag 
 }
 
 if (document.getElementById("searchLongitude").value == "" && document.getElementById("searchLatitude").value == "") {
