@@ -13,24 +13,27 @@ console.log("The geoTagging script is going to start...");
  * A function to retrieve the current location and update the page.
  * It is called once the page has been fully loaded.
  */
-function updateLocation(helper) {
+ function updateLocation(helper) {
   const map = new MapManager("bWQM84jzA43ETIOGOIyfighZXKAUFXmm");
+
+  const jsonFromDataTags = document.querySelector("#mapView");
 
   const latitude = helper.latitude;
   const longitude = helper.longitude;
-  const tags = helper.tags;
+  
+  // NOTE: converts back to a regular
+  const tags = JSON.parse(jsonFromDataTags.dataset.tags);
 
   const mapURL = map.getMapUrl(latitude, longitude, tags);
 
   document.getElementById("latitude").attributes[3].nodeValue = latitude;
   document.getElementById("longitude").attributes[3].nodeValue = longitude;
 
-  document.getElementById("mapView").attributes.getNamedItem("src").value = mapURL;
-  //NOTE Added data-tags call
-  document.getElementById("mapView").attributes.getNamedItem("data-tags").value = JSON.stringify(mapURL.tagList);
+  document.getElementById("mapView").attributes.getNamedItem("src").value =
+    mapURL;
 
   document.getElementById("searchLatitude").value = latitude;
-  document.getElementById("searchLongitude").value = longitude; 
+  document.getElementById("searchLongitude").value = longitude;
 }
 
 if (document.getElementById("searchLongitude").value == "" && document.getElementById("searchLatitude").value == "") {
