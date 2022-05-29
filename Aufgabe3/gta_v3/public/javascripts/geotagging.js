@@ -40,4 +40,5 @@ if (document.getElementById("searchLongitude").value == "" && document.getElemen
 
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM content loaded");
 });
