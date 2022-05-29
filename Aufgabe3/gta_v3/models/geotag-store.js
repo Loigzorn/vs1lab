@@ -66,7 +66,7 @@ class InMemoryGeoTagStore{
             var y = 111.3 * (longitudeOne - secondLongitude);
             var distance = Math.sqrt(x * x, y * y);
             if (distance <= 10) {
-                nearbyGeoTags.push(geoTags[i]);
+                nearbyGeoTags.push(this.#geoTags[i]);
             }
         }
 
@@ -79,7 +79,7 @@ class InMemoryGeoTagStore{
         for (var i = 0; i < nearbyGeoTags.length; i++) {
             const geoTag = nearbyGeoTags[i];
 
-            if(geoTag.hashtag().includes(keyword) || geoTag.tagName().includes(keyword)) {
+            if(geoTag.hashtag.includes(keyword) || geoTag.tagName.includes(keyword)) {
                 geoTagsWithKeyword.push(nearbyGeoTags[i]);
             }
         }
