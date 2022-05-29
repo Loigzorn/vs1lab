@@ -31,7 +31,10 @@ class InMemoryGeoTagStore{
     instance;
 
     constructor() {
-        this.#geoTags = GeoTagExamples.tagList;
+        var tagList = GeoTagExamples.tagList;
+        for (var i = 0; i < tagList.length; i++) {
+            this.#geoTags.push(new GeoTag(tagList[i][1], tagList[i][2], tagList[i][0], tagList[i][3]));
+        }
     }
 
     addGeoTag(geoTag) {
