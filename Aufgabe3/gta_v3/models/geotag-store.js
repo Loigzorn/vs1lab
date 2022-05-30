@@ -41,7 +41,6 @@ class InMemoryGeoTagStore{
 
     addGeoTag(geoTag) {
         if (geoTag instanceof GeoTag) {
-            console.log(this.#geoTags.length);
             this.#geoTags.push(geoTag);
         } else {
             console.error("Failed to add GeoTag, as geoTag is: " + geoTag);
