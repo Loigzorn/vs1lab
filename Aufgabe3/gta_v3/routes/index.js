@@ -30,6 +30,7 @@ const GeoTag = require('../models/geotag.js');
  */
 // eslint-disable-next-line no-unused-vars
 const GeoTagStore = require('../models/geotag-store.js');
+const store = new GeoTagStore();
 
 /**
  * Route '/' for HTTP 'GET' requests.
@@ -43,7 +44,7 @@ const GeoTagStore = require('../models/geotag-store.js');
  
 // TODO: extend the following route example if necessary
 router.get('/', (req, res) => {
-  const geoTags = GeoTagStore.getInstance().geoTags;
+  const geoTags = store.geoTags;
   res.render('index', {
     taglist: geoTags,
     set_latitude: "",
@@ -71,9 +72,9 @@ router.get('/', (req, res) => {
 
 router.post('/tagging', (req, res) => {
   const geotag = new GeoTag(req.body.latitude, req.body.longitude, req.body.tagName, req.body.hashtag);
-  GeoTagStore.getInstance().addGeoTag(geotag);
+  store.addGeoTag(geotag);
 
-  const geoTags = GeoTagStore.getInstance().getNearbyGeoTags(geotag.latitude, geotag.longitude);
+  const geoTags = store.getNearbyGeoTags(geotag.latitude, geotag.longitude);
   res.render('index', {
     taglist: geoTags,
     set_latitude: req.body["latitude"],
@@ -100,8 +101,8 @@ router.post('/tagging', (req, res) => {
 // TODO: ... your code here ...
 //earchNearbyGeoTags(keyword, latitude, longitude)
 router.post('/discovery', (req, res) => {
-  const geoTags = req.body.searchNameOfTag ? GeoTagStore.getInstance().searchNearbyGeoTags(req.body.searchNameOfTag, req.body.searchLatitude, req.body.searchLongitude) :
-  GeoTagStore.getInstance().getNearbyGeoTags(req.body.searchLatitude, req.body.searchLongitude);
+  const geoTags = req.body.searchNameOfTag ? store.searchNearbyGeoTags(req.body.searchNameOfTag, req.body.searchLatitude, req.body.searchLongitude) :
+  store.getNearbyGeoTags(req.body.searchLatitude, req.body.searchLongitude);
   res.render('index', {
     taglist: geoTags,
     set_latitude: req.body["latitude"],
