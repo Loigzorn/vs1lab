@@ -31,7 +31,6 @@ class InMemoryGeoTagStore{
      * @type {GeoTag[]}
      */
     #geoTags = [];
-    static #instance;
 
     constructor() {
         var tagList = GeoTagExamples.tagList;
@@ -92,13 +91,6 @@ class InMemoryGeoTagStore{
      */
     get geoTags() {
         return this.#geoTags;
-    }
-
-    static getInstance() {
-        if(InMemoryGeoTagStore.#instance == null) {
-            InMemoryGeoTagStore.#instance = new InMemoryGeoTagStore();
-        }
-        return InMemoryGeoTagStore.#instance;
     }
 }
 
