@@ -219,6 +219,12 @@ section.tagging {
   margin-left: 3%
 }
 
+.readonly_field {
+  background-color: rgb(247, 247, 247);
+  border: 1.3px solid rgb(182, 175, 175);
+  color: rgb(85, 84, 84);
+}
+
 /* ### TODO ### Styles for Discovery component */
 
 .main__discovery {

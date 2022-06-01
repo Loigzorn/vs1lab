@@ -34,10 +34,10 @@
                 <fieldset>
                     <legend>Add a new GeoTag</legend>
                     <label for="latitude">Latitude:</label><br>
-                    <input type="text" id="latitude" name="latitude" placeholder="49.01379" pattern="^[9-0]+" readonly value="<%= set_latitude %>" > <br>
+                    <input type="text" id="latitude" class="readonly_field" name="latitude" placeholder="49.01379" pattern="^[9-0]+" readonly value="<%= set_latitude %>" > <br>
 
                     <label for="longitude">Longitude:</label><br>
-                    <input type="text" id="longitude" name="longitude" placeholder="8.390071" pattern="^[9-0]+" readonly value="<%= set_longitude %>" > <br>
+                    <input type="text" id="longitude" class="readonly_field" name="longitude" placeholder="8.390071" pattern="^[9-0]+" readonly value="<%= set_longitude %>" > <br>
 
                     <label for="tagName">Name:</label><br>
                     <input type="text" id="tagName" name="tagName" placeholder="e.g. Central Berlin" maxlength=10 required><br>
