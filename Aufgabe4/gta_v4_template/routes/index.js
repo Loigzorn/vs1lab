@@ -26,7 +26,7 @@ const GeoTag = require('../models/geotag');
  */
 // eslint-disable-next-line no-unused-vars
 const GeoTagStore = require('../models/geotag-store');
-
+const store = new GeoTagStore();
 // App routes (A3)
 
 /**
@@ -38,8 +38,14 @@ const GeoTagStore = require('../models/geotag-store');
  * As response, the ejs-template is rendered without geotag objects.
  */
 
-router.get('/', (req, res) => {
-  res.render('index', { taglist: [] })
+ router.get('/', (req, res) => {
+  const geoTags = store.geoTags;
+  res.render('index', {
+    taglist: [],
+    set_latitude: "",
+    set_longitude: "",
+    set_mapView: JSON.stringify([])
+  });
 });
 
 // API routes (A4)
