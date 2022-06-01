@@ -1,0 +1,271 @@
+/*
+  File origin: VS1LAB A1b  
+
+  CSS style is BEM. Classes used for CSS, IDs for JavaScript querying (future use).
+  CSS variables used for clarity and themability (e.g. through SSR). 
+  Inherited box sizing used for ease of including 3rd party content-box components.
+*/
+
+/* Global styling */
+
+html {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+
+  /* This approach prevents issues with 3rd party content-box components */
+  box-sizing: inherit;
+}
+
+
+/* Variables (example: see declaration for "a" below) */
+
+:root {
+  --link-color: #00B7FF;
+  --background-color: #efefef;
+  --border-color: #cdcdcd;
+  --gray-color: #666;
+}
+
+
+/* HTML element styles */
+
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+a {
+  color: var(--link-color);
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  padding: 10px;
+  border-style: solid;
+  border-color: black;
+  border-width: 0.5px;
+  margin-bottom: 8px;
+  color: var(--link-color);
+  background-color: var(--background-color);
+  font-weight: bold;
+  border-radius: 8px;
+  border: 1px solid;
+  border-color: gray;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+input {
+  padding: 6px;
+  margin-left: 8px;
+  margin-right: 16px;
+  margin-top: 4px;
+  margin-bottom: 10px;
+}
+
+input[type="submit"] {
+  border-radius: 8px;
+  border: 1px solid;
+  width: 178px;
+}
+
+fieldset {
+  padding-top: 10px;
+}
+
+label {
+  margin: 6px;
+}
+
+legend {
+  margin-left: 6px;
+  font-weight: bold;
+}
+
+section {
+  margin-top: 4%;
+  margin-left: 0.5%;
+  margin-right: 0.5%;
+  margin-bottom: 1%;
+}
+
+/* ### TODO ### Styles for other HTML elements */
+
+/* ... your code here ... */
+
+
+/* Grid styles (no changes required) */
+
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.col-1 {
+  width: calc(8.33% - 1rem);
+}
+
+.col-2 {
+  width: calc(16.66% - 1rem);
+}
+
+.col-3 {
+  width: calc(25% - 1rem);
+}
+
+.col-4 {
+  width: calc(33.33% - 1rem);
+}
+
+.col-5 {
+  width: calc(41.66% - 1rem);
+}
+
+.col-6 {
+  width: calc(50% - 1rem);
+}
+
+.col-7 {
+  width: calc(58.33% - 1rem);
+}
+
+.col-8 {
+  width: calc(66.66% - 1rem);
+}
+
+.col-9 {
+  width: calc(75% - 1rem);
+}
+
+.col-10 {
+  width: calc(83.33% - 1rem);
+}
+
+.col-11 {
+  width: calc(91.66% - 1rem);
+}
+
+.col-12 {
+  width: calc(100% - 1rem);
+}
+
+
+/* ### TODO ### Styles for Header Component */
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: var(--background-color);
+  height: 130px;
+}
+
+.header__title {
+  margin-top: 50px;
+}
+
+.header__navigation {
+  margin-right: 40px;
+  margin-top: 60px;
+}
+.header__image {
+  box-align: right;
+  margin-top: 40px;
+  margin-left: 3%;
+  margin-bottom: 50px;
+  width: 40px;
+}
+
+
+/* ### TODO ### Styles for Main Component */
+
+/* Create three equal columns that float next to each other */
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other on smaller screens (600px wide or less) */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+}
+
+/* ### TODO ### Styles for Tagging component */
+
+section.tagging {
+  margin-left: 3%
+}
+
+/* ### TODO ### Styles for Discovery component */
+
+.main__discovery {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-bottom: 3%;
+}
+
+.discovery__wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 20px;
+  margin-top: 3%;
+}
+
+#discovery__map__discription {
+  color: var(--border-color);
+  display: block;
+}
+
+
+/* ### TODO ### Styles for Footer Component */
+
+.footer {
+  margin-top: auto; 
+  display: flex;
+  flex-direction:row;
+  justify-content:space-between;
+  background-color: var(--background-color);
+  height: 80px;
+}
+
+#footerSpanText {
+  margin-left: 3%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  font-family: "Verdana", sans-serif;
+}
+
+/* ### TODO ### Media Queries */
+
+@media(max-width: 751px) {
+  .main {
+    flex-direction: column;
+  }
+}
