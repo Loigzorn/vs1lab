@@ -14,6 +14,13 @@ console.log("The geoTagging script is going to start...");
  * A function to retrieve the current location and update the page.
  * It is called once the page has been fully loaded.
  */
+document.addEventListener("click",updateLocation);
+document.addEventListener("submit",updateLocation){
+  event.preventDefault();
+  window.history.back();
+};
+
+  
 function updateLocation(helper) {
 
   const latitude = helper.latitude;
@@ -32,6 +39,7 @@ function updateLocation(helper) {
   const map = new MapManager("bWQM84jzA43ETIOGOIyfighZXKAUFXmm");
   const mapURL = map.getMapUrl(latitude, longitude, tags);
   document.getElementById("mapView").attributes.getNamedItem("src").value = mapURL;
+
 
 }
 
