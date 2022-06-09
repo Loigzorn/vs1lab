@@ -58,12 +58,12 @@ document.addEventListener("DOMContentLoaded", () => {
     //Verwendung GeoTag Konstruktor?
   }
   
-  fetch("http://localhost:3000/", { //URL? Adresse von Ressource, die wir vom Server abholen wollen
+  fetch("http://localhost:3000/", { //URL? Adresse von Ressource
   method: "POST", 
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify(data)
   })
-  .then(response => response.json()); //auf response Objekt wird JSON Funktion aufgerufen
+  .then(response => response.json()); //...?
   
 
   }
