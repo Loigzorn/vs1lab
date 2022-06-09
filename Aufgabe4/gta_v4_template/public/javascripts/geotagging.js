@@ -9,6 +9,7 @@
 // Try to find this output in the browser...
 console.log("The geoTagging script is going to start...");
 
+
 /**
  * A function to retrieve the current location and update the page.
  * It is called once the page has been fully loaded.
@@ -40,3 +41,41 @@ function updateLocation(helper) {
 if (JSON.stringify(document.getElementById("searchLongitude").value).match("\d")) {
   LocationHelper.findLocation(updateLocation);
 }
+//THERESA 
+document.addEventListener("DOMContentLoaded", () => {
+  //Evtl. Code hier einfügen ("nach dem Laden der Seite...")
+});
+
+
+ function eventHandler1(event) { 
+  event.preventDefault();
+  alert("Event " + event.type
+  + " fired on element " + this.tagName); //Test
+
+  const data={
+    //Daten, die in JSON format an server gesendet werden sollen
+    //Tagging Formular
+    //Verwendung GeoTag Konstruktor?
+  }
+  
+  fetch("http://localhost:3000/", { //URL? Adresse von Ressource, die wir vom Server abholen wollen
+  method: "POST", 
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(data)
+  })
+  .then(response => response.json()); //auf response Objekt wird JSON Funktion aufgerufen
+  
+
+  }
+ function eventHandler2(event){
+   event.preventDefault();
+   alert("Event " + event.type + "fired on element " + this.tagName); //Test
+   $.getJSON(); //HTTP get mit jquery
+  
+ }
+  searchTag.addEventListener("click", eventHandler2);
+  submitTag.addEventListener("click", eventHandler1);
+  
+ /*noch fehlend: Funktion zur Aktualisierung der Darstellung im Discovery-Widget, 
+ soll die Ergebnisliste und die Karte aktualisieren. 
+ Die Aktualisierung soll sowohl beim Anlegen eines neuen Filters als auch eines neuen GeoTags erfolgen.*/
