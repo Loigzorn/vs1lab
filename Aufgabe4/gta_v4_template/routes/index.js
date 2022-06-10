@@ -64,6 +64,31 @@ const store = new GeoTagStore();
 
 // TODO: ... your code here ...
 
+router.get('/api/geotags', (req, res) => {
+  
+  if(req.body.searchNameOfTag!=undefined){
+
+    if(req.body.searchLatitude!=undefined & req.body.searchLongitude!=undefined)
+    {
+      const geoTags =  store.searchNearbyGeoTags(req.body.searchNameOfTag, req.body.searchLatitude, req.body.searchLongitude) ;
+      store.getNearbyGeoTags(req.body.searchLatitude, req.body.searchLongitude);
+
+    }
+    else 
+    req.body.latitude
+   
+    var GeoTagobjects=[];
+  }
+
+  res.render('index', {
+     
+    "taglist": [],
+    "latitude": "latitude",
+    "longitude": "longitude",
+    "mapView": JSON.stringify([])
+    
+  });
+});
 
 /**
  * Route '/api/geotags' for HTTP 'POST' requests.
@@ -77,6 +102,16 @@ const store = new GeoTagStore();
  */
 
 // TODO: ... your code here ...
+router.post('/api/geotags', (req, res) => {
+  
+  
+  res.render('index', {
+    "taglist": [],
+    "latitude": "latitude",
+    "longitude": "longitude",
+    "mapView": JSON.stringify([])
+  });
+});
 
 
 /**
@@ -90,7 +125,15 @@ const store = new GeoTagStore();
  */
 
 // TODO: ... your code here ...
-
+router.get('/api/geotags/:id', (req, res) => {
+  
+  res.render('index', {
+    "taglist": [],
+    "latitude": "latitude",
+    "longitude": "longitude",
+    "mapView": JSON.stringify([])
+  });
+});
 
 /**
  * Route '/api/geotags/:id' for HTTP 'PUT' requests.
@@ -107,7 +150,16 @@ const store = new GeoTagStore();
  */
 
 // TODO: ... your code here ...
+router.put('/api/geotags/:id', (req, res) => {
+  
 
+  res.render('index', {
+    "taglist": [],
+    "latitude": "latitude",
+    "longitude": "longitude",
+    "mapView": JSON.stringify([])
+  });
+});
 
 /**
  * Route '/api/geotags/:id' for HTTP 'DELETE' requests.
@@ -121,5 +173,14 @@ const store = new GeoTagStore();
  */
 
 // TODO: ... your code here ...
+router.delete('/api/geotags/:id', (req, res) => {
+  
+  res.render('index', {
+    "taglist": [],
+    "latitude": "latitude",
+    "longitude": "longitude",
+    "mapView": JSON.stringify([])
+  });
+});
 
 module.exports = router;
