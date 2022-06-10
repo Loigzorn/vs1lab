@@ -53,18 +53,25 @@ document.addEventListener("DOMContentLoaded", () => {
   + " fired on element " + this.tagName); //Test
 
   const data={
+    longitude : document.getElementById("longitude").value,
+    latitude : document.getElementById("latitude").value,
+    tagName:document.getElementById("tagName").value,
+    hashtag : document.getElementById("hashtag").value
     //Daten, die in JSON format an server gesendet werden sollen
     //Tagging Formular
     //Verwendung GeoTag Konstruktor?
   }
   
+
   fetch("http://localhost:3000/", { //URL? Adresse von Ressource
   method: "POST", 
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify(data)
   })
-  .then(response => response.json()); //...?
-  
+  .then(response => response.json())
+  .then( data=>update(data))
+  .catch(err => console.log(err));
+
 
   }
  function eventHandler2(event){
@@ -75,7 +82,28 @@ document.addEventListener("DOMContentLoaded", () => {
  }
   searchTag.addEventListener("click", eventHandler2);
   submitTag.addEventListener("click", eventHandler1);
-  
- /*noch fehlend: Funktion zur Aktualisierung der Darstellung im Discovery-Widget, 
+
+/*Funktion zur Aktualisierung der Darstellung im Discovery-Widget, 
  soll die Ergebnisliste und die Karte aktualisieren. 
  Die Aktualisierung soll sowohl beim Anlegen eines neuen Filters als auch eines neuen GeoTags erfolgen.*/
+
+  var update = (data) => { //? aktuell wie updateLocation nur mit data aufgerufen
+  const latitude = data.latitude;
+  const longitude = data.longitude;
+
+  document.getElementById("latitude").value = latitude;
+  document.getElementById("longitude").value = longitude;
+
+  document.getElementById("searchLatitude").value = latitude;
+  document.getElementById("searchLongitude").value = longitude;
+
+  let imageView = document.getElementById("mapView");
+  let tagsAsString = imageView.dataset.tags
+  let tags = JSON.parse(tagsAsString);
+
+  const map = new MapManager("bWQM84jzA43ETIOGOIyfighZXKAUFXmm");
+  const mapURL = map.getMapUrl(latitude, longitude, tags);
+  document.getElementById("mapView").attributes.getNamedItem("src").value = mapURL;
+   }
+  
+ 
