@@ -10,7 +10,8 @@
     "ejs": "^3.1.8",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"
