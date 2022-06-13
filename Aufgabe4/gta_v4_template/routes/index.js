@@ -70,12 +70,11 @@ router.get('/api/geotags', (req, res) => {
 
     if(req.body.searchLatitude!=undefined & req.body.searchLongitude!=undefined)
     {
-      const geoTags =  store.searchNearbyGeoTags(req.body.searchNameOfTag, req.body.searchLatitude, req.body.searchLongitude) ;
-      store.getNearbyGeoTags(req.body.searchLatitude, req.body.searchLongitude);
+      const geoTags =  store.getNearbyGeoTags(req.body.searchLatitude, req.body.searchLongitude);
 
     }
-    else 
-    req.body.latitude
+
+    
    
     var GeoTagobjects=[];
   }
@@ -103,7 +102,8 @@ router.get('/api/geotags', (req, res) => {
 
 // TODO: ... your code here ...
 router.post('/api/geotags', (req, res) => {
-  
+
+  req.header
   
 
   res.render('index', {
@@ -127,7 +127,7 @@ router.post('/api/geotags', (req, res) => {
 
 // TODO: ... your code here ...
 router.get('/api/geotags/:id', (req, res) => {
-  req.path.ID 
+  req.path.id 
   
   res.render('index', {
     "taglist": [],
@@ -153,7 +153,15 @@ router.get('/api/geotags/:id', (req, res) => {
 
 // TODO: ... your code here ...
 router.put('/api/geotags/:id', (req, res) => {
-  
+  req.path.id
+  req.body
+  var geo= {
+    "taglist": [],
+    "latitude": req.body.latitude,
+    "longitude":  req.body.longitude,
+    "mapView": JSON.stringify([])
+  }
+
 
   res.render('index', {
     "taglist": [],
@@ -176,12 +184,16 @@ router.put('/api/geotags/:id', (req, res) => {
 
 // TODO: ... your code here ...
 router.delete('/api/geotags/:id', (req, res) => {
-  
-  res.render('index', {
+  store.removeGeoTag(req.path.id)
+  var geo= {
     "taglist": [],
-    "latitude": "latitude",
-    "longitude": "longitude",
+    "latitude": req.body.latitude,
+    "longitude":  req.body.longitude,
     "mapView": JSON.stringify([])
+  }
+
+  res.render('index', {
+   geo
   });
 });
 
