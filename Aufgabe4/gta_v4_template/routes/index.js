@@ -45,7 +45,7 @@
  router.get('/', (req, res) => {
      const geoTags = store.geoTags;
      res.render('index', {
-         taglist: [], set_latitude: "", set_longitude: "", set_mapView: JSON.stringify([])
+         taglist: geoTags, set_latitude: "", set_longitude: "", set_mapView: JSON.stringify(geoTags)
      });
  });
  
