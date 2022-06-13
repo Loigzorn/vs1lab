@@ -32,56 +32,38 @@ function updateLocation(helper) {
   const map = new MapManager("bWQM84jzA43ETIOGOIyfighZXKAUFXmm");
   const mapURL = map.getMapUrl(latitude, longitude, tags);
   document.getElementById("mapView").attributes.getNamedItem("src").value = mapURL;
-
 }
 
-// Wait for the page to fully load its DOM content, then call updateLocation
-// It is senseless to wait for the DOMContentLoaded event, 
-// as the event has already happend at this stage.
-if (JSON.stringify(document.getElementById("searchLongitude").value).match("\d")) {
-  LocationHelper.findLocation(updateLocation);
-}
-//THERESA 
-document.addEventListener("DOMContentLoaded", () => {
-  //Evtl. Code hier einfügen ("nach dem Laden der Seite...")
-});
-
-
- function eventHandler1(event) { 
+ function addGeoTagOnTaggingFormEvent(event) { 
   event.preventDefault();
-  alert("Event " + event.type
-  + " fired on element " + this.tagName); //Test
-
-  const data={
-    longitude : document.getElementById("longitude").value,
-    latitude : document.getElementById("latitude").value,
-    tagName:document.getElementById("tagName").value,
-    hashtag : document.getElementById("hashtag").value
-    //Daten, die in JSON format an server gesendet werden sollen
-    //Tagging Formular
-    //Verwendung GeoTag Konstruktor?
-  }
   
+  const latitude = document.getElementById("latitude").value;
+  const longitude = document.getElementById("longitude").value;
+  const tagName = document.getElementById("tagName").value;
+  const hashtag = document.getElementById("hashtag").value;
+  const data = {
+    "latitude": latitude,
+    "longitude": longitude,
+    "tagName": tagName,
+    "hashtag": hashtag
+  }
 
-  fetch("http://localhost:3000/", { //URL? Adresse von Ressource
+  fetch("http://localhost:3000/api/geotags/:", {
   method: "POST", 
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify(data)
   })
-  .then(response => response.json())
-  .then( data=>update(data))
+  .then(response => {console.log(response);response.json()})
+  .then( data=> update(data))
   .catch(err => console.log(err));
-
-
   }
- function eventHandler2(event){
+
+ function searchGeoTagsOnDiscoveryEvent(event) {
    event.preventDefault();
    alert("Event " + event.type + "fired on element " + this.tagName); //Test
    $.getJSON(); //HTTP get mit jquery
   
  }
-  searchTag.addEventListener("click", eventHandler2);
-  submitTag.addEventListener("click", eventHandler1);
 
 /*Funktion zur Aktualisierung der Darstellung im Discovery-Widget, 
  soll die Ergebnisliste und die Karte aktualisieren. 
@@ -104,6 +86,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const map = new MapManager("bWQM84jzA43ETIOGOIyfighZXKAUFXmm");
   const mapURL = map.getMapUrl(latitude, longitude, tags);
   document.getElementById("mapView").attributes.getNamedItem("src").value = mapURL;
-   }
+}
+
+// Wait for the page to fully load its DOM content, then call updateLocation
+// It is senseless to wait for the DOMContentLoaded event, 
+// as the event has already happend at this stage.
+if (JSON.stringify(document.getElementById("searchLongitude").value).match("\d")) {
+  LocationHelper.findLocation(updateLocation);
+}
+searchTag.addEventListener("click", searchGeoTagsOnDiscoveryEvent);
+submitTag.addEventListener("click", addGeoTagOnTaggingFormEvent);
+
+document.addEventListener("DOMContentLoaded", () => {
+  //Evtl. Code hier einfügen ("nach dem Laden der Seite...")
+});
   
  
