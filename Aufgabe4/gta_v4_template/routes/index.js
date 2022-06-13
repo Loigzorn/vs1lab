@@ -84,7 +84,7 @@
  router.post('/api/geotags', (req, res) => {
      const geoTag = new GeoTag(req.body.latitude, req.body.longitude, req.body.tagName, req.body.hashtag)
      store.addGeoTag(geoTag)
-     res.setHeader('Resource-URL', '/api/geotags/' + geoTag.uuid)
+     res.setHeader('Location', '/api/geotags/' + geoTag.uuid)
      res.send(JSON.stringify(geoTag))
  });
  
