@@ -105,6 +105,7 @@ router.get('/api/geotags', (req, res) => {
 router.post('/api/geotags', (req, res) => {
   
   
+
   res.render('index', {
     "taglist": [],
     "latitude": "latitude",
@@ -126,6 +127,7 @@ router.post('/api/geotags', (req, res) => {
 
 // TODO: ... your code here ...
 router.get('/api/geotags/:id', (req, res) => {
+  req.path.ID 
   
   res.render('index', {
     "taglist": [],
