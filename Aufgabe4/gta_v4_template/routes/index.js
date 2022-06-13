@@ -85,7 +85,7 @@
      const geoTag = new GeoTag(req.body.latitude, req.body.longitude, req.body.tagName, req.body.hashtag)
      store.addGeoTag(geoTag)
      res.setHeader('Location', '/api/geotags/' + geoTag.uuid)
-     res.send(JSON.stringify(geoTag))
+     res.status(201).send(JSON.stringify(geoTag))
  });
  
  /**
