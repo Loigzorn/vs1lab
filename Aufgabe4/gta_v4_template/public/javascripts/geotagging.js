@@ -50,13 +50,15 @@ function updateLocation(helper) {
 
   postGeoTag("http://localhost:3000/api/geotags", data).then(data => updateLocation(data))
   .catch(err => console.error(err));
+
+  getGeoTags("http://localhost:3000/api/geotags").then(data => updateGeoTags(data))
+  .catch(err => console.error(err));
 }
 
  function searchGeoTagsOnDiscoveryEvent(event) {
    event.preventDefault();
-   alert("Event " + event.type + "fired on element " + this.tagName); //Test
-   $.getJSON(); //HTTP get mit jquery
-  
+   var url = '/api/geotags';
+  $.getJSON(url, updateGeoTags);
  }
 
  async function postGeoTag(url, data) {
@@ -67,6 +69,24 @@ function updateLocation(helper) {
   });
   return response.json();
  }
+
+ async function getGeoTags(url) {
+  const response = await fetch(url, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  return response.json();
+ }
+
+ var updateGeoTags = function(geoTags) {
+  var geos = document.getElementById("discoveryResults");
+  geos.innerHTML = null;
+  for (var key in geoTags) {
+    var li = document.createElement("li");
+    li.innerHTML = geoTags[key].tagName + "(" + geoTags[key].latitude + "," + geoTags[key].longitude + ")" + geoTags[key].hashtag ; 
+    geos.appendChild(li);
+  }
+ };
 
 /*Funktion zur Aktualisierung der Darstellung im Discovery-Widget, 
  soll die Ergebnisliste und die Karte aktualisieren. 
