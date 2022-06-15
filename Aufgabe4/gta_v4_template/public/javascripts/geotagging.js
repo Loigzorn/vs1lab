@@ -48,16 +48,17 @@ function updateLocation(helper) {
     "hashtag": hashtag
   }
 
-  postGeoTag("http://localhost:3000/api/geotags", data).then(data => updateLocation(data))
+  postGeoTag("http://localhost:3000/api/geotags", data)
   .catch(err => console.error(err));
 
   getGeoTags("http://localhost:3000/api/geotags").then(data => updateGeoTags(data))
   .catch(err => console.error(err));
 }
 
- function searchGeoTagsOnDiscoveryEvent(event) {
-   event.preventDefault();
-   var url = '/api/geotags';
+function searchGeoTagsOnDiscoveryEvent(event) {
+  event.preventDefault();
+  var searchTerm = document.getElementById("searchNameOfTag").value;
+  var url = '/api/geotags/filter='+ searchTerm;
   $.getJSON(url, updateGeoTags);
  }
 
@@ -78,7 +79,14 @@ function updateLocation(helper) {
   return response.json();
  }
 
+ /**
+  * @param {GeoTag[]} geoTags List of the geoTags
+  */
  var updateGeoTags = function(geoTags) {
+  let imageView = document.getElementById("mapView");
+  imageView.dataset.tags = JSON.stringify(geoTags);
+  LocationHelper.findLocation(updateLocation);
+
   var geos = document.getElementById("discoveryResults");
   geos.innerHTML = null;
   for (var key in geoTags) {
