@@ -32,6 +32,7 @@ function updateLocation(helper) {
   const map = new MapManager("bWQM84jzA43ETIOGOIyfighZXKAUFXmm");
   const mapURL = map.getMapUrl(latitude, longitude, tags);
   document.getElementById("mapView").attributes.getNamedItem("src").value = mapURL;
+  updateDiscoveryIndexes(tags.length);
 }
 
  function addGeoTagOnTaggingFormEvent(event) { 
@@ -105,6 +106,7 @@ function searchGeoTagsOnDiscoveryEvent(event) {
     li.innerHTML = geoTags[key].tagName + " (" + geoTags[key].latitude + "," + geoTags[key].longitude + ") " + geoTags[key].hashtag ; 
     geos.appendChild(li);
   }
+  updateDiscoveryIndexes(geoTags.length);
  };
 
  function showPreviousGeoTagsInDiscovery(event) {
@@ -113,6 +115,14 @@ function searchGeoTagsOnDiscoveryEvent(event) {
 
  function showNextGeoTagsInDiscovery(event) {
   console.log("Next Page clicked event needs handling");
+ }
+
+ function updateDiscoveryIndexes(totalGeoTags) {
+  var divElement = document.getElementById("discoveryPagingIndexes");
+  divElement.innerHTML = null;
+  var innerDiv = document.createElement("paragraph");
+  innerDiv.innerHTML = "2" + "/" + "2" + " (" + totalGeoTags + ")";
+  divElement.appendChild(innerDiv);
  }
 
 /*Funktion zur Aktualisierung der Darstellung im Discovery-Widget, 
