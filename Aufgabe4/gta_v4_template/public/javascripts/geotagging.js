@@ -107,6 +107,14 @@ function searchGeoTagsOnDiscoveryEvent(event) {
   }
  };
 
+ function showPreviousGeoTagsInDiscovery(event) {
+  console.log("Previous Page clicked event needs handling");
+ }
+
+ function showNextGeoTagsInDiscovery(event) {
+  console.log("Next Page clicked event needs handling");
+ }
+
 /*Funktion zur Aktualisierung der Darstellung im Discovery-Widget, 
  soll die Ergebnisliste und die Karte aktualisieren. 
  Die Aktualisierung soll sowohl beim Anlegen eines neuen Filters als auch eines neuen GeoTags erfolgen.*/
@@ -120,6 +128,8 @@ if (JSON.stringify(document.getElementById("searchLongitude").value).match("\d")
 
 submitTag.addEventListener("click", addGeoTagOnTaggingFormEvent);
 searchTag.addEventListener("click", searchGeoTagsOnDiscoveryEvent);
+discoveryPagingPreviousButton.addEventListener("click", showPreviousGeoTagsInDiscovery);
+discoveryPagingNextButton.addEventListener("click", showNextGeoTagsInDiscovery);
 
 document.addEventListener("DOMContentLoaded", () => {
   //Evtl. Code hier einfügen ("nach dem Laden der Seite...")
