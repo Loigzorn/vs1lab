@@ -1,0 +1,19 @@
+{
+  "name": "vs1lab",
+  "version": "1.0.0",
+  "description": "Ziel des Labors ist die praktische Anwendung verschiedener Web Technologien aus der Vorlesung. Dazu wird in mehreren Schritten eine komplette Web Anwendung erstellt. In jedem Schritt wird jeweils ein Bereich von Web Technologien genauer betrachtet.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Loigzorn/vs1lab.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Loigzorn/vs1lab/issues"
+  },
+  "homepage": "https://github.com/Loigzorn/vs1lab#readme"
+}
