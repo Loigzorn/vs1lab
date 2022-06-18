@@ -65,9 +65,33 @@
  
  // TODO: Currently there is no possibility in the backend to search independently for "searchterm" and latitude and longitude
  router.get('/api/geotags', (req, res) => {
-     const geoTags = store.geoTags;
-     res.send(geoTags);
+    const params = getParams(req.url);
+    const filter = params.filter;
+    const latitude = params.latitude;
+    const longitude = params.longitude;
+    console.log(filter, latitude, longitude);
+    var geoTags = [];
+    if (latitude !== undefined && longitude !== undefined) {
+        geoTags = filter !== undefined ? store.searchNearbyGeoTags(filter, latitude, longitude) : store.getNearbyGeoTags(latitude, longitude);
+    } else {
+        geoTags = store.geoTags;
+    }
+    res.send(geoTags);
  });
+
+ function getParams(url) {
+    var request = {};
+    var url = url.substring(0).split('?')[1];
+    if (url === undefined) {
+        return request;
+    }
+    var pairs = url.substring(0).split('&');
+    for (var i = 0; i < pairs.length; i++) {
+        var pair = pairs[i].split('=');
+        request[pair[0]] = pair[1];
+    }
+return request;
+}
  
  
  /**
