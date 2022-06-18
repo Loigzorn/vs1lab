@@ -8,7 +8,9 @@
 // The console window must be opened explicitly in the browser.
 // Try to find this output in the browser...
 console.log("The geoTagging script is going to start...");
-
+var current_page = 1;
+const records_per_page = 5;
+var totalCountGeoTags = 0;
 
 /**
  * A function to retrieve the current location and update the page.
@@ -28,15 +30,19 @@ function updateLocation(helper) {
   let imageView = document.getElementById("mapView");
   let tagsAsString = imageView.dataset.tags
   let tags = JSON.parse(tagsAsString);
+  if (totalCountGeoTags <= 0) {
+    totalCountGeoTags = tags.length;
+  }
 
   const map = new MapManager("bWQM84jzA43ETIOGOIyfighZXKAUFXmm");
   const mapURL = map.getMapUrl(latitude, longitude, tags);
   document.getElementById("mapView").attributes.getNamedItem("src").value = mapURL;
+  updateDiscoveryIndexes();
 }
 
- function addGeoTagOnTaggingFormEvent(event) { 
+ function addGeoTagOnTaggingFormEvent(event) {
   event.preventDefault();
-  
+
   const latitude = document.getElementById("latitude").value;
   const longitude = document.getElementById("longitude").value;
   const tagName = document.getElementById("tagName").value;
@@ -48,7 +54,7 @@ function updateLocation(helper) {
     "hashtag": hashtag
   }
 
-  postGeoTag("http://localhost:3000/api/geotags", data)
+  postGeoTag("http://localhost:3000/api/geotags", data).then(totalCountGeoTags++)
   .catch(err => console.error(err));
 
   getGeoTags("http://localhost:3000/api/geotags").then(data => updateGeoTags(data))
@@ -102,36 +108,66 @@ function searchGeoTagsOnDiscoveryEvent(event) {
   geos.innerHTML = null;
   for (var key in geoTags) {
     var li = document.createElement("li");
-    li.innerHTML = geoTags[key].tagName + " (" + geoTags[key].latitude + "," + geoTags[key].longitude + ") " + geoTags[key].hashtag ; 
+    li.innerHTML = geoTags[key].tagName + " (" + geoTags[key].latitude + "," + geoTags[key].longitude + ") " + geoTags[key].hashtag ;
     geos.appendChild(li);
   }
  };
 
- function showPreviousGeoTagsInDiscovery(event) {
-  console.log("Previous Page clicked event needs handling");
+ function showPreviousGeoTagsInDiscovery(_) {
+  if (current_page > 1) {
+    current_page--;
+    changePage(current_page);
+  }
  }
 
- function showNextGeoTagsInDiscovery(event) {
-  console.log("Next Page clicked event needs handling");
+ function showNextGeoTagsInDiscovery(_) {
+  if (current_page < numPages()) {
+    current_page++;
+    changePage(current_page);
+  }
  }
 
- function updateDiscoveryIndexes(totalGeoTags) {
+ function updateDiscoveryIndexes() {
   var divElement = document.getElementById("discoveryPagingIndexes");
   divElement.innerHTML = null;
   var innerDiv = document.createElement("paragraph");
-  innerDiv.innerHTML = "2" + "/" + "2" + " (" + totalGeoTags + ")";
+  innerDiv.innerHTML = current_page + "/" + numPages() + " (" + totalCountGeoTags + ")";
   divElement.appendChild(innerDiv);
  }
 
-/*Funktion zur Aktualisierung der Darstellung im Discovery-Widget, 
- soll die Ergebnisliste und die Karte aktualisieren. 
+function changePage(page) {
+  var btn_next = document.getElementById("discoveryPagingNextButton");
+  var btn_prev = document.getElementById("discoveryPagingPreviousButton");
+  var listing_table = document.getElementById("listingTable");
+
+  if (page == 1) {
+    btn_prev.style.visibility = "hidden";
+  } else {
+    btn_prev.style.visibility = "visible";
+  }
+
+  if (page == numPages()) {
+    btn_next.style.visibility = "hidden";
+  } else {
+    btn_next.style.visibility = "visible";
+  }
+  updateDiscoveryIndexes();
+}
+
+function numPages() {
+    return Math.ceil(totalCountGeoTags / records_per_page);
+}
+
+/*Funktion zur Aktualisierung der Darstellung im Discovery-Widget,
+ soll die Ergebnisliste und die Karte aktualisieren.
  Die Aktualisierung soll sowohl beim Anlegen eines neuen Filters als auch eines neuen GeoTags erfolgen.*/
 
 // Wait for the page to fully load its DOM content, then call updateLocation
-// It is senseless to wait for the DOMContentLoaded event, 
+// It is senseless to wait for the DOMContentLoaded event,
 // as the event has already happend at this stage.
 if (JSON.stringify(document.getElementById("searchLongitude").value).match("\d")) {
   LocationHelper.findLocation(updateLocation);
+  changePage(1);
 }
 
 submitTag.addEventListener("click", addGeoTagOnTaggingFormEvent);
@@ -142,4 +178,3 @@ discoveryPagingNextButton.addEventListener("click", showNextGeoTagsInDiscovery);
 document.addEventListener("DOMContentLoaded", () => {
   //Evtl. Code hier einfügen ("nach dem Laden der Seite...")
 });
- 
