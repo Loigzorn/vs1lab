@@ -58,9 +58,20 @@ function updateLocation(helper) {
 function searchGeoTagsOnDiscoveryEvent(event) {
   event.preventDefault();
   var searchTerm = document.getElementById("searchNameOfTag").value;
-  var url = '/api/geotags/filter='+ searchTerm;
+  const latitude = document.getElementById("latitude").value;
+  const longitude = document.getElementById("longitude").value;
+  const data = searchTerm == "" ? {latitude: latitude, longitude: longitude} : {filter: searchTerm, latitude: latitude, longitude: longitude};
+  var url = "http://localhost:3000/api/geotags/?" + encodeQueryData(data);
+  console.log("Requested url: ", url);
   $.getJSON(url, updateGeoTags);
  }
+
+ function encodeQueryData(data) {
+  const ret = [];
+  for (let d in data)
+    ret.push(encodeURIComponent(d) + "=" + encodeURIComponent(data[d]));
+  return ret.join('&');
+}
 
  async function postGeoTag(url, data) {
   const response = await fetch(url, {
@@ -113,5 +124,4 @@ searchTag.addEventListener("click", searchGeoTagsOnDiscoveryEvent);
 document.addEventListener("DOMContentLoaded", () => {
   //Evtl. Code hier einfügen ("nach dem Laden der Seite...")
 });
-  
  
