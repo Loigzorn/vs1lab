@@ -151,8 +151,7 @@ function searchGeoTagsOnDiscoveryEvent(event) {
   geos.innerHTML = null;
   for (var key in geoTags) {
     var li = document.createElement("li");
-    li.innerHTML = geoTags[key].tagName + " (" + geoTags[key].latitude + "," + geoTags[key].longitude + ") " + geoTags[key].hashtag;
-    li.id = "discoveryResulteGeoTags"
+    li.innerHTML = geoTags[key].tagName + " (" + geoTags[key].latitude + "," + geoTags[key].longitude + ") " + geoTags[key].hashtag ;
     geos.appendChild(li);
   }
 
