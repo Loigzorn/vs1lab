@@ -11,6 +11,17 @@ console.log("The geoTagging script is going to start...");
 var current_page = 1;
 const records_per_page = 5;
 var totalCountGeoTags = 0;
+var geoTagUuids = [];
+
+function addUuid(geoTag) {
+  const uuid = geoTag.uuid;
+  for(let element in geoTagUuids) {
+    if (element === uuid) {
+      return;
+    }
+  }
+  geoTagUuids.push(uuid);
+}
 
 /**
  * A function to retrieve the current location and update the page.
@@ -30,14 +41,13 @@ function updateLocation(helper) {
   let imageView = document.getElementById("mapView");
   let tagsAsString = imageView.dataset.tags
   let tags = JSON.parse(tagsAsString);
-  if (totalCountGeoTags <= 0) {
-    totalCountGeoTags = tags.length;
-  }
 
+  for (var tag in tags) {
+    addUuid(tags[tag]);
+  }
   const map = new MapManager("bWQM84jzA43ETIOGOIyfighZXKAUFXmm");
   const mapURL = map.getMapUrl(latitude, longitude, tags);
   document.getElementById("mapView").attributes.getNamedItem("src").value = mapURL;
-  updateDiscoveryIndexes();
 }
 
  function addGeoTagOnTaggingFormEvent(event) {
@@ -54,10 +64,10 @@ function updateLocation(helper) {
     "hashtag": hashtag
   }
 
-  postGeoTag("http://localhost:3000/api/geotags", data).then(totalCountGeoTags++)
+  postGeoTag("http://localhost:3000/api/geotags", data).then(() => totalCountGeoTags++)
   .catch(err => console.error(err));
 
-  getGeoTags("http://localhost:3000/api/geotags").then(data => updateGeoTags(data))
+  getGeoTags("http://localhost:3000/api/geotags").then(data => updateGeoTags(data)).then(() => updateDiscoveryIndexes())
   .catch(err => console.error(err));
 }
 
@@ -108,7 +118,7 @@ function searchGeoTagsOnDiscoveryEvent(event) {
   geos.innerHTML = null;
   for (var key in geoTags) {
     var li = document.createElement("li");
-    li.innerHTML = geoTags[key].tagName + " (" + geoTags[key].latitude + "," + geoTags[key].longitude + ") " + geoTags[key].hashtag ;
+    li.innerHTML = geoTags[key].tagName + " (" + geoTags[key].latitude + "," + geoTags[key].longitude + ") " + geoTags[key].hashtag;
     geos.appendChild(li);
   }
  };
@@ -138,7 +148,10 @@ function searchGeoTagsOnDiscoveryEvent(event) {
 function changePage(page) {
   var btn_next = document.getElementById("discoveryPagingNextButton");
   var btn_prev = document.getElementById("discoveryPagingPreviousButton");
-  var listing_table = document.getElementById("listingTable");
+
+  getGeoTags("http://localhost:3000/api/geotags").then(data => totalCountGeoTags = data.length).then(() => updateDiscoveryIndexes())
+  .catch(err => console.error(err));
+
 
   if (page == 1) {
     btn_prev.style.visibility = "hidden";
@@ -151,7 +164,6 @@ function changePage(page) {
   } else {
     btn_next.style.visibility = "visible";
   }
-  updateDiscoveryIndexes();
 }
 
 function numPages() {
@@ -166,8 +178,7 @@ function numPages() {
 // It is senseless to wait for the DOMContentLoaded event,
 // as the event has already happend at this stage.
 if (JSON.stringify(document.getElementById("searchLongitude").value).match("\d")) {
-  LocationHelper.findLocation(updateLocation);
-  changePage(1);
+  LocationHelper.findLocation(updateLocation).then(() => changePage(1));
 }
 
 submitTag.addEventListener("click", addGeoTagOnTaggingFormEvent);
