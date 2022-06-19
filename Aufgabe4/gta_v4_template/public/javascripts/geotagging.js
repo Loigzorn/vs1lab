@@ -53,7 +53,7 @@ function updateLocation(helper) {
   postGeoTag("http://localhost:3000/api/geotags", data).then(() => totalCountGeoTags++)
   .catch(err => console.error(err));
 
-  var searchTerm = collectfilterData();
+  var searchTerm = collectFilterData();
   var url = "http://localhost:3000/api/geotags" + "/?" + encodeQueryData(searchTerm);
   getGeoTags(url).then(data => updateGeoTags(data))
   .catch(err => console.error(err));
