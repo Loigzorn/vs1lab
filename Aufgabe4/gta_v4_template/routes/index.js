@@ -69,7 +69,6 @@
     const filter = params.filter;
     const latitude = params.latitude;
     const longitude = params.longitude;
-    console.log(filter, latitude, longitude);
     var geoTags = [];
     if (latitude !== undefined && longitude !== undefined) {
         geoTags = filter !== undefined ? store.searchNearbyGeoTags(filter, latitude, longitude) : store.getNearbyGeoTags(latitude, longitude);
