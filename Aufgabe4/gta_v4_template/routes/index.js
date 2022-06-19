@@ -69,12 +69,19 @@
     const filter = params.filter;
     const latitude = params.latitude;
     const longitude = params.longitude;
+    const beginIndex = params.beginIndex;
+    const limit = params.limit;
     var geoTags = [];
-    if (latitude !== undefined && longitude !== undefined) {
+    if (latitude !== undefined && latitude !== "" && longitude !== undefined && longitude !== "") {
         geoTags = filter !== undefined ? store.searchNearbyGeoTags(filter, latitude, longitude) : store.getNearbyGeoTags(latitude, longitude);
     } else {
         geoTags = store.geoTags;
     }
+    if (beginIndex !== undefined && limit !== undefined) {
+        var end = parseInt(beginIndex) + parseInt(limit)
+        geoTags = geoTags.slice(beginIndex, end);
+    }
+
     res.send(geoTags);
  });
 
