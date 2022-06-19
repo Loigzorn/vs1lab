@@ -64,10 +64,27 @@
   */
  
  // TODO: Currently there is no possibility in the backend to search independently for "searchterm" and latitude and longitude
- router.get('/api/geotags', (req, res) => {
+ 
+ 
+ router.get('/api/geotags/:name', (req, res) => {
+    const geoTags = store.geoTags;
+    const name = req.params.tagName.split(':name').pop()
+    geoTags.forEach(element => {
+        if (element.tagName === name) {
+            res.send(element);
+        }
+        else{
+             res.send(geoTags);   
+        }
+    })
+});
+
+ 
+ 
+  router.get('/api/geotags', (req, res) => {
      const geoTags = store.geoTags;
      res.send(geoTags);
- });
+  });
  
  
  /**
