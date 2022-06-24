@@ -247,6 +247,25 @@ section.tagging {
   display: block;
 }
 
+.discovery__paging {
+  display: flex;
+  justify-content:space-between;
+}
+
+.discovery__paging__button {
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: 1px solid;
+  width: 100px;
+}
+#discoveryPagingIndexes {
+  padding: 8px;
+  margin-top: 5px;
+  margin-left: 40px;
+  border-radius: 8px;
+  width: 100px;
+}
 
 /* ### TODO ### Styles for Footer Component */
 
